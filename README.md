@@ -12,7 +12,7 @@ TEST_LINK : https://emochatbot.herokuapp.com/
 7. 실행 ```python manage.py runserver```
 
 
-## Heroku 배포
+## 배포 준비
 #### 1. settings.py
 - DEBUG 수정
   ```
@@ -28,20 +28,21 @@ TEST_LINK : https://emochatbot.herokuapp.com/
   ```
 
 
-#### 2. Heroku 회원가입
+#### 2. Heroku 배포
+- 회원가입
   https://www.heroku.com
 
-#### 3. 로그인
+- 로그인
   ```heroku login```  
 
-#### 4. 저장소 생성
+- 저장소 생성
   ```heroku create 저장소이름```
 
-#### 5. push
+- push
   ```git push heroku main```
-
-#### 6. migrate
+  
+- migrate
   ```heroku run python manage.py migrate```
 
-#### 7. 배포한 파일 실행
+- 배포한 파일 실행
   ```heroku open```
