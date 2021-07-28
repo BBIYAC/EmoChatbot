@@ -29,19 +29,19 @@ TEST_LINK : https://emochatbot.herokuapp.com/
 
 
 #### 2. Heroku 회원가입
-https://www.heroku.com
+  https://www.heroku.com
 
 #### 3. 로그인
-```heroku login```
+  ```heroku login```  
 
 #### 4. 저장소 생성
-```heroku create 저장소이름```
+  ```heroku create 저장소이름```
 
 #### 5. push
-```git push heroku main```
+  ```git push heroku main```
 
 #### 6. migrate
-```heroku run python manage.py migrate```
+  ```heroku run python manage.py migrate```
 
 #### 7. 배포한 파일 실행
-```heroku open```
+  ```heroku open```
