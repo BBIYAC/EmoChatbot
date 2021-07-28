@@ -27,6 +27,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-kzvd7=*o7z1$(b
 DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
 
 ALLOWED_HOSTS = [
+    'emochatbot.herokuapp.com',
     '279af9ea018c.ngrok.io',
     '127.0.0.1'
 ]
