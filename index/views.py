@@ -10,7 +10,7 @@ def index(request):
 
 @csrf_exempt
 def webhook(request):
-    # print('Start webhook')
+    print('Connected webhook')
     # build a request object
     req = json.loads(request.body)
     # get action from json
@@ -19,13 +19,13 @@ def webhook(request):
     fulfillmentText = req.get('queryResult').get('fulfillmentText')
     fulfillmentMessages = req.get('queryResult').get('fulfillmentMessages')
     # return a fulfillment message
-    ff_response = fulfillment_response()
-    ff_text = ff_response.fulfillment_text('눈누난나')
-    ff_messages = ff_response.fulfillment_messages(fulfillmentMessages)
-    reply = ff_response.main_response(ff_text, ff_messages)
-    print(reply)
+    # ff_response = fulfillment_response()
+    # ff_text = ff_response.fulfillment_text(fulfillmentText)
+    # ff_messages = ff_response.fulfillment_messages(fulfillmentMessages)
+    # reply = ff_response.main_response(ff_text, ff_messages)
+    
     # return response
-    return JsonResponse(reply, safe=False)
+    return JsonResponse(fulfillmentText, safe=False)
 
 
 '''
