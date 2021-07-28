@@ -3,37 +3,43 @@ TEST_LINK : https://emochatbot.herokuapp.com/
 
 
 ## Django 실행 방법
-1. Repository 가져오기
+**1. Repository 가져오기**
   ```
   git clone [REPO_URL]
    ```
-2. 가상환경 생성 
+
+**2. 가상환경 생성**
   ```
   python -m venv myvenv
   ```
-3. 가상환경 실행(window) 
+
+**3. 가상환경 실행(window)** 
   ```
   source myvenv/Scripts/activete
   ```
-4. 패키지 설치 
+
+**4. 패키지 설치**
   ```
   pip install -r requirements.txt
   ```
-5. makemigrations
+
+**5. makemigrations**
   ```
   python manage.py makemigrations
   ```
-6. migrate
+
+**6. migrate**
   ```
   python manage.py migrate
   ```
-7. 장고 서버 실행
-   ```
-   python manage.py runserver
-   ```
+
+**7. 장고 서버 실행**
+  ```
+  python manage.py runserver
+  ```
 
 
-## 배포 준비
+## Heroku 배포
 ### 1. settings.py
 - DEBUG 수정
   ```
@@ -49,8 +55,9 @@ TEST_LINK : https://emochatbot.herokuapp.com/
   ```
 
 
-### 2. Heroku 배포
-- 회원가입
+
+### 2. Heroku 연결
+- 회원가입  
   https://www.heroku.com
 
 - 로그인
