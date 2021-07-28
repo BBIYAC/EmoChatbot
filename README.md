@@ -1,7 +1,6 @@
 # EmoChatbot
 https://emochatbot.herokuapp.com/
 
----------------------------------------
 
 ## 실행 방법
 1. ```git clone [REPO_URL] ```
@@ -12,25 +11,25 @@ https://emochatbot.herokuapp.com/
 6. ```python manage.py migrate```
 7. 실행 ```python manage.py runserver```
 
----------------------------------------
 
 ## Heroku 배포
 #### 1. settings.py
 - DEBUG 수정
-```
-# DEBUG = True 
-DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
-```
+  ```
+  # DEBUG = True 
+  DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
+  ```
 
 - SECRET_KEY 수정
-```
-import os 
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '[YOUR_SECRET_KEY]')
-```
+  ```
+  import os 
+  # SECRET_KEY = '[YOUR_SECRET_KEY]'
+  SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '[YOUR_SECRET_KEY]')
+  ```
 
 
 #### 2. Heroku 회원가입
-- https://www.heroku.com
+https://www.heroku.com
 
 #### 3. 로그인
 ```heroku login```
