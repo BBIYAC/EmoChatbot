@@ -15,17 +15,17 @@ def webhook(request):
     req = json.loads(request.body)
     # get action from json
     action = req.get('queryResult').get('action')
-    # get answer from json
+    # get fulfillment from json
     fulfillmentText = req.get('queryResult').get('fulfillmentText')
     fulfillmentMessages = req.get('queryResult').get('fulfillmentMessages')
     # return a fulfillment message
-    # ff_response = fulfillment_response()
-    # ff_text = ff_response.fulfillment_text(fulfillmentText)
-    # ff_messages = ff_response.fulfillment_messages(fulfillmentMessages)
-    # reply = ff_response.main_response(ff_text, ff_messages)
-    print('fulfillmentText: {0}'.format(fulfillmentText))
+    ff_response = fulfillment_response()
+    ff_text = ff_response.fulfillment_text(fulfillmentText)
+    ff_messages = ff_response.fulfillment_messages(fulfillmentMessages)
+    reply = ff_response.main_response(ff_text, ff_messages)
+    print('reply: {0}'.format(fulfillmentText))
     # return response
-    return JsonResponse(fulfillmentText, safe=False)
+    return JsonResponse(reply, safe=False)
 
 
 '''
