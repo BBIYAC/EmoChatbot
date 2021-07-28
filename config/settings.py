@@ -28,7 +28,6 @@ DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
 
 ALLOWED_HOSTS = [
     'emochatbot.herokuapp.com',
-    '279af9ea018c.ngrok.io',
     '127.0.0.1'
 ]
 
