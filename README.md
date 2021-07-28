@@ -2,7 +2,7 @@
 TEST_LINK : https://emochatbot.herokuapp.com/
 
 
-## 실행 방법
+## Django 실행 방법
 1. ```git clone [REPO_URL] ```
 2. 가상환경 생성 ```python -m venv myvenv```
 3. 가상환경 실행(window) ```source myvenv/Scripts/activete```
