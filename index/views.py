@@ -24,9 +24,8 @@ def webhook(request):
     ff_messages = ff_response.fulfillment_messages(fulfillmentMessages)
     reply = ff_response.main_response(ff_text, ff_messages)
     # print('reply: {0}'.format(reply))
-    answer = {'fulfillmentText' : fulfillmentText}
     # return response
-    return JsonResponse(answer, safe=False)
+    return JsonResponse(reply, safe=False)
 
 
 '''
