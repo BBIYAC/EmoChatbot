@@ -136,10 +136,6 @@ jupyterlab @ file:///tmp/build/80754af9/jupyterlab_1619133235951/work
 jupyterlab-pygments @ file:///tmp/build/80754af9/jupyterlab_pygments_1601490720602/work
 jupyterlab-server @ file:///tmp/build/80754af9/jupyterlab_server_1617134334258/work
 jupyterlab-widgets @ file:///tmp/build/80754af9/jupyterlab_widgets_1609884341231/work
-Keras @ file:///tmp/build/80754af9/keras_split_1593112142734/work
-Keras-Applications @ file:///tmp/build/80754af9/keras-applications_1594366238411/work
-keras-nightly==2.5.0.dev2021032900
-Keras-Preprocessing @ file:///tmp/build/80754af9/keras-preprocessing_1612283640596/work
 keyring @ file:///C:/ci/keyring_1621524753360/work
 kiwisolver @ file:///C:/ci/kiwisolver_1612282606037/work
 konlpy==0.5.2
@@ -289,12 +285,6 @@ statsmodels==0.12.2
 sympy @ file:///C:/ci/sympy_1618255511605/work
 tables==3.6.1
 tblib @ file:///tmp/build/80754af9/tblib_1597928476713/work
-tensorboard==2.5.0
-tensorboard-data-server==0.6.1
-tensorboard-plugin-wit==1.8.0
-tensorflow==2.5.0
-tensorflow-estimator==2.5.0
-tensorflow-gpu==2.5.0
 termcolor==1.1.0
 terminado==0.9.4
 testpath @ file:///home/ktietz/src/ci/testpath_1611930608132/work
