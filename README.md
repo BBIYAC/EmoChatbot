@@ -54,6 +54,13 @@ TEST_LINK : https://emochatbot.herokuapp.com/
   SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '[YOUR_SECRET_KEY]')
   ```
 
+- ALLOW_HOST 수정
+```
+ALLOWED_HOSTS = [
+    '[배포한 앱 이름]].herokuapp.com',
+    '127.0.0.1'
+]
+```
 
 
 ### 2. Heroku 연결
