@@ -43,7 +43,7 @@ def detect_intent_texts(project_id, session_id, text, language_code):
     )
     fulfillmentMessages = response.query_result.fulfillment_messages
     fulfillmentText = response.query_result.fulfillment_text
-    # print("fulfillmentMessages: {}\n".format(fulfillmentMessages))
+    print("fulfillmentMessages: {}\n".format(fulfillmentMessages))
 
     if fulfillmentText:
         # 인텐트에 데한 리스폰스
@@ -64,9 +64,14 @@ def detect_intent_texts(project_id, session_id, text, language_code):
         # json_string = MessageToJson(fulfillmentMessages)
         
         for message in fulfillmentMessages:
-            print(f"msg3: {type(message)}")
-            msg += str(type(message)) + " "
-        msg = response
+            # message type : <class 'google.cloud.dialogflow_v2.types.intent.Intent.Message'>
+            # message.payload type : <class 'proto.marshal.collections.maps.MapComposite'>
+            # MessageToJson(message._pb.payload['richContent'][0][0]) type : <class 'str'>
+            # eval(MessageToJson(message._pb.payload['richContent'][0][0])) type : <class 'dict'>
+            print(f"msg2: {eval(MessageToJson(message._pb.payload['richContent'][0][0]))['text']}")
+            print(f"msg3: {eval(MessageToJson(message._pb.payload['richContent'][0][0]))['link']}")
+            msg += str(eval(MessageToJson(message._pb.payload['richContent'][0][0]))['text']) + "\n" + str(eval(MessageToJson(message._pb.payload['richContent'][0][0]))['link'])
+
         answer = msg
    
     return answer
