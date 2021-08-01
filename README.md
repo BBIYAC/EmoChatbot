@@ -15,7 +15,7 @@ TEST_LINK : https://emochatbot.herokuapp.com/
 
 **3. 가상환경 실행(window)** 
   ```
-  source myvenv/Scripts/activete
+  source myvenv/Scripts/activate
   ```
 
 **4. 패키지 설치**
