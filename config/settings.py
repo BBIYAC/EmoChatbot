@@ -22,6 +22,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 import os 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-kzvd7=*o7z1$(bqj%u$j((*g-w_-3k(^xxlqbce=f&4h+rcca3')
+credential_path = "credential/emochatbot-aupx-c781ff2d85b6.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]=credential_path
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
