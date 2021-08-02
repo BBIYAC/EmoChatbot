@@ -51,7 +51,7 @@ def detect_intent_texts(project_id, session_id, text, language_code):
         msg = ""
         
         for message in fulfillmentMessages:
-            msg += str(message.text.text[0]) + " "
+            msg += str(message.text.text[0]) + "<br>"
         answer = msg
     else:
         # '그래' 답을 했을 경우 (follow-up Intent)
@@ -63,7 +63,7 @@ def detect_intent_texts(project_id, session_id, text, language_code):
             # message.payload : <class 'proto.marshal.collections.maps.MapComposite'>
             # MessageToJson(message._pb.payload['richContent'][0][0]) : <class 'str'>
             # eval(MessageToJson(message._pb.payload['richContent'][0][0])) : <class 'dict'>
-            msg += str(eval(MessageToJson(message._pb.payload['richContent'][0][0]))['text']) + "\n" + str(eval(MessageToJson(message._pb.payload['richContent'][0][0]))['link'])
+            msg += str(eval(MessageToJson(message._pb.payload['richContent'][0][0]))['text']) + "<br>" + str(eval(MessageToJson(message._pb.payload['richContent'][0][0]))['link'])
 
         answer = msg
     print(f"answer: {answer}")
