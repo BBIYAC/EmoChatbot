@@ -4,16 +4,35 @@
 <meta name="viewport" content="width-device-width, initial-scale=1">
 </head>
 <body>
-    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-    <df-messenger
-      intent="WELCOME"
-      chat-title="EmoChatbot"
-      agent-id="828613f6-4761-4d79-9ba9-920f4d5f2c6e"
-      language-code="ko"
-    ></df-messenger>
     <center>
         <h1>EmoChatbot with Dialogflow</h1>
     </center>
+    <input id="text" type="text" value="">
+
+
+    <script>
+        document.getElementById('text').addEventListener('keyup',(key)=>{
+            if(key.keyCode == 13){
+                const saying = document.getElementById('text').value;
+                console.log("엔터")
+                var myHeader = new Headers();
+                myHeader.append('Content-Type', 'application/json');
+
+                fetch('',{
+                    method: 'POST',
+                    headers: myHeader,
+                    body:JSON.stringify({
+                        "saying": saying               
+                      })
+                })
+                .then(data=>{
+                    console.log(data);
+                }).catch(error=>{
+                    console.log(error);
+                })
+            }
+        })
+    </script>
 </body>
 </html>
 
