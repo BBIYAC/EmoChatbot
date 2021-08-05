@@ -21,7 +21,9 @@ msgerForm.addEventListener("submit", event => {
 
   appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText);
   msgerInput.value = "";
+
   botResponse(msgText);
+
 });
 
 function appendMessage(name, img, side, text) {
@@ -33,11 +35,11 @@ function appendMessage(name, img, side, text) {
       <div class="msg-bubble">
         <div class="msg-info">
           <div class="msg-info-name">${name}</div>
-          <div class="msg-info-time">${formatDate(new Date())}</div>
         </div>
 
         <div class="msg-text">${text}</div>
       </div>
+      <div class="msg-info-time">${formatDate(new Date())}</div>
     </div>
     `;
 
@@ -46,17 +48,33 @@ function appendMessage(name, img, side, text) {
 }
 
 function botResponse(rawText) {
-
-  // Bot Response
-  $.get("/response", { msg: rawText }).done(function (data) {
+  if(rawText != "안녕"){
     console.log(rawText);
-    console.log(data);
-    const msgText = data;
-    appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
+  } 
 
-  });
+  var myHeader = new Headers();
+  myHeader.append('Content-Type', 'application/json');
+
+  fetch('',{
+    method: 'POST',
+    headers: myHeader,
+    body:JSON.stringify({
+        "msgText": rawText               
+      })
+  })
+  .then(event=>{
+    event.json().then((data)=>{
+    msgText = data["res"];
+    console.log(msgText);
+    appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
+    });
+  })
+  .catch(error=>{
+      console.log(error);
+  })
 
 }
+
 
 // Utils
 function get(selector, root = document) {
@@ -69,3 +87,4 @@ function formatDate(date) {
 
   return `${h.slice(-2)}:${m.slice(-2)}`;
 }
+

@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <link rel="shortcut icon" href="{% static 'img/chatbot.ico' %}" type="image/x-icon">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   <script language="javascript">
     function time(){
     var time= new Date(); //시간받기위해서 new date
@@ -25,9 +25,11 @@
   <!-- partial:index.partial.html -->
   <section class="msger">
     <header class="msger-header">
+      <i class="fas fa-chevron-left msger-header-prev"></i>
       <div class="msger-header-title">
         😄 Emo Chatbot 😄
       </div>
+      <i class="fas fa-ellipsis-h msger-header-setting"></i>
     </header>
 
     <main class="msger-chat">
