@@ -1,6 +1,7 @@
 const msgerForm = get(".msger-inputarea");
 const msgerInput = get(".msger-input");
 const msgerChat = get(".msger-chat");
+const msgerTitle = get('.msger-header-title');
 
 
 // Icons made by Freepik from www.flaticon.com
@@ -10,7 +11,17 @@ const BOT_NAME = "EmoChatBot";
 const PERSON_NAME = "Me";
 
 window.onload = function(){
-  botResponse("안녕");
+  msgerTitle.innerHTML = "😄 "+ BOT_NAME + " 😄";
+  appendMessage(BOT_NAME, BOT_IMG, "left", '오늘의 기분을 표현하는 사진을 보내주세요!');
+  setTimeout(function() {
+    appendImage("left", '이미지 업로드');
+    const msgImg = get('.msg-image-button')
+    msgImg.addEventListener("click", function(){
+      get('.msger-input-image').click();
+   }); 
+  }, 1000);
+  
+
 }
 
 msgerForm.addEventListener("submit", event => {
@@ -47,10 +58,25 @@ function appendMessage(name, img, side, text) {
   msgerChat.scrollTop += 500;
 }
 
+function appendImage(side, text) {
+  //   Simple solution for small apps
+  const msgHTML = `
+    <div class="msg ${side}-msg">
+      <button class="msg-image-button">
+        <div class="msg-text">${text}</div>
+      </button>
+      <input type="file" class="msger-input-image" accept="img/*" required multiple></input>
+    </div>
+    `;
+  
+  
+
+  msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+  msgerChat.scrollTop += 500;
+}
+
 function botResponse(rawText) {
-  if(rawText != "안녕"){
-    console.log(rawText);
-  } 
+  console.log(rawText);
 
   var myHeader = new Headers();
   myHeader.append('Content-Type', 'application/json');

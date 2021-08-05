@@ -114,6 +114,18 @@
   .left-msg .msg-bubble {
     border-bottom-left-radius: 0;
   }
+
+  .msg-image-button {
+    border: 1px solid #B1B1B1;
+    border-radius: 20px;
+    background-color: var(--msger-bg);
+    padding: 10px 20px;
+    margin-left: 70px;
+    font-size: 1em;
+  }
+  .msg-image-button{
+    cursor: pointer;
+  }
   
   .right-msg {
     flex-direction: row-reverse;
@@ -139,6 +151,11 @@
     border-radius: 3px;
     font-size: 1em;
   }
+
+  .msger-input-image{
+    display: none;
+  }
+
   .msger-input {
     flex: 1;
     background: #ddd;
