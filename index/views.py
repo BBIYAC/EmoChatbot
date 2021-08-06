@@ -93,4 +93,4 @@ def emotion_analysis(request):
         response_obj = {}
         response_obj['res']=emotion
         return JsonResponse(response_obj)
-    return render(request, "index.html", {'emotion': emotion})
+    return render(request, "index.html")
