@@ -89,6 +89,12 @@
     background-size: cover;
     border-radius: 50%;
   }
+
+  .msg-upload-image{
+    max-width: 200px;
+    border-radius: 15px;
+  }
+
   .msg-bubble {
     max-width: 450px;
     padding: 15px;
@@ -117,10 +123,10 @@
 
   .msg-image-button {
     border: 1px solid #B1B1B1;
-    border-radius: 20px;
+    border-radius: 15px;
     background-color: var(--msger-bg);
-    padding: 10px 20px;
-    margin-left: 70px;
+    padding: 10px;
+    margin-left: 60px;
     font-size: 1em;
   }
   .msg-image-button{
