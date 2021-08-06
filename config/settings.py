@@ -25,6 +25,8 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-kzvd7=*o7z1$(b
 credential_path = "credential/emochatbot-aupx-c781ff2d85b6.json"
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"]=credential_path
 
+DATA_UPLOAD_MAX_MEMORY_SIZE = None
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
 

@@ -3,19 +3,18 @@ const msgerInput = get(".msger-input");
 const msgerChat = get(".msger-chat");
 const msgerTitle = get('.msger-header-title');
 
-
-
 // Icons made by Freepik from www.flaticon.com
 const BOT_IMG = "https://image.flaticon.com/icons/svg/327/327779.svg";
 const PERSON_IMG = "https://image.flaticon.com/icons/svg/145/145867.svg";
 const BOT_NAME = "EmoChatBot";
 const PERSON_NAME = "Me";
 
-// 채팅방 입장 시 챗봇 출력 및 이미지 업로드
+
+
+// 채팅방 입장 시 챗봇 및 이미지 업로드 버튼 출력 => 하루 주기로 변경
 window.onload = function(){
   msgerTitle.innerHTML = "😄 "+ BOT_NAME + " 😄";
-  appendMessage(BOT_NAME, BOT_IMG, "left", '오늘의 기분을 표현하는 사진을 보내주세요!');
-  appendImageButton("left", '이미지 업로드');
+  appendImageButton('오늘의 기분을 표현하는 사진을 보내주세요!', '이미지 업로드');
   const msgImg = get('.msg-image-button');
   msgImg.addEventListener("click", function(){
     get('.msger-input-image').click();
@@ -24,38 +23,56 @@ window.onload = function(){
   var prevBubbleWidth = msgImg.parentElement.previousElementSibling.querySelector('.msg-bubble').offsetWidth + 'px';
   msgImg.style.width = prevBubbleWidth;
 
-  // 시간 지연 함수
-  // setTimeout(function() {}, 3000);
 }
 
-// 사용자가 이미지 업로드 시 채팅에 이미지 출력
+
+//  이미지 업로드 시 채팅에 이미지 출력
 function uploadImg(event) { 
   var reader = new FileReader(); 
   reader.onload = function(event) { 
-    appendImage(PERSON_IMG, "right", event.target.result);
-    appendMessage(BOT_NAME, BOT_IMG, "left", '오늘은 기분이 안좋아보이네요..<br>어떤 일이 있으셨나요?');
+    appendImage(event.target.result); // event.target.result : 바이트 형태
+
+    // setTimeout(function() { // 시간 지연 함수
+    //   appendMessage(BOT_NAME, BOT_IMG, "left", '이미지 분석 중입니다<br>잠시만 기다려주세요!');
+    // }, 1000);
+
+    var myHeader = new Headers();
+    myHeader.append('Content-Type', 'application/json');
+
+    fetch('analysis',{
+      method: 'POST',
+      headers: myHeader,
+      body: event.target.result.toString(),
+    })
+    .then(event=>{
+      event.json().then((data)=>{
+        emotion = data["res"];
+        msgText = `${emotion}<br>기분이 안 좋아 보이네요.<br>어떤 일이 있었나요?` // 감정별 if문 처리
+        appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
+        console.log(msgText);
+      });
+    })
+    .catch(error=>{
+      console.log(error);
+    })
+
   }; 
   reader.readAsDataURL(event.target.files[0]); 
-  
 }
 
 
-// 사용자가 채팅 입력 시 발생하는 이벤트
+// 사용자가 채팅 입력 시 Chat 추가 후 봇 응답 받아오기
 msgerForm.addEventListener("submit", event => {
   event.preventDefault();
-
   const msgText = msgerInput.value;
   if (!msgText) return;
-
   appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText);
   msgerInput.value = "";
-
   botResponse(msgText);
-
 });
 
 
-// 메시지 추가 함수
+// Chat 추가 함수
 function appendMessage(name, img, side, text) {
   //   Simple solution for small apps
   const msgHTML = `
@@ -77,13 +94,15 @@ function appendMessage(name, img, side, text) {
   msgerChat.scrollTop += 500;
 }
 
+
 // 이미지 업로드 시 이미지 업로드 버튼 생성 함수
-function appendImageButton(side, text) {
+function appendImageButton(text, button) {
   //   Simple solution for small apps
+  appendMessage(BOT_NAME, BOT_IMG, "left", text);
   const msgHTML = `
-    <div class="msg ${side}-msg">
+    <div class="msg left-msg">
       <button class="msg-image-button">
-        <div class="msg-text">${text}</div>
+        <div class="msg-text">${button}</div>
       </button>
       <input type="file" class="msger-input-image" accept="img/*" required multiple onchange="uploadImg(event);"></input>
     </div>
@@ -93,12 +112,14 @@ function appendImageButton(side, text) {
   msgerChat.scrollTop += 500;
 }
 
+
+
 // 업로드한 이미지 출력 함수
-function appendImage(img, side, uploadImg) {
+function appendImage(uploadImg) {
   //   Simple solution for small apps
   const msgHTML = `
-    <div class="msg ${side}-msg">
-      <div class="msg-img" style="background-image: url(${img})"></div>
+    <div class="msg right-msg">
+      <div class="msg-img" style="background-image: url(${PERSON_IMG})"></div>
       <img class="msg-upload-image" src="${uploadImg}">
       <div class="msg-info-time">${formatDate(new Date())}</div>
     </div>
@@ -108,7 +129,26 @@ function appendImage(img, side, uploadImg) {
   msgerChat.scrollTop += 500;
 }
 
-// 사용자 입력에 따른 챗봇 응답 함수
+
+// 챗봇 링크 응답
+function appendLinkButton(texts) {
+  //   Simple solution for small apps
+  const msgHTML = `
+    <div class="msg left-msg">
+      <div class="msg-img" style="background-image: url(${BOT_IMG})"></div>
+      <a class="msg-link-button" href="${texts[1]}" target="_blank">
+        <div class="msg-text">${texts[0]}</div>
+      </a>
+      <div class="msg-info-time">${formatDate(new Date())}</div>
+    </div>
+    `;
+
+  msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+  msgerChat.scrollTop += 500;
+}
+
+
+// 사용자 입력에 따른 챗봇 응답 
 function botResponse(rawText) {
   console.log(rawText);
 
@@ -126,7 +166,13 @@ function botResponse(rawText) {
     event.json().then((data)=>{
     msgText = data["res"];
     console.log(msgText);
-    appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
+    if(msgText.includes("http")){
+      texts = msgText.split('<br>');
+      appendLinkButton(texts)
+    }
+    else{
+      appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
+    }
     });
   })
   .catch(error=>{

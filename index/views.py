@@ -9,6 +9,9 @@ from google.protobuf.json_format import MessageToJson
 from google.api_core.exceptions import InvalidArgument
 import ast
 
+from deepface import DeepFace
+import os
+
 
 @csrf_exempt
 def index(request):
@@ -37,20 +40,13 @@ class webAPI:
         try:    
             response = session_client.detect_intent(
             request={"session": session, "query_input": query_input}
-        )
+            )
         except InvalidArgument:
             raise
         
-
         print("=" * 50)
         userText = response.query_result.query_text
         print("Query text: {}".format(userText))
-        # print(
-        #     "Detected intent: {} (confidence: {})".format(
-        #         response.query_result.intent.display_name,
-        #         response.query_result.intent_detection_confidence,
-        #     )
-        # )
 
         fulfillmentText = response.query_result.fulfillment_text
         fulfillmentMessages = response.query_result.fulfillment_messages
@@ -75,6 +71,26 @@ class webAPI:
                 msg += str(eval(MessageToJson(message._pb.payload['richContent'][0][0]))['text']) + "<br>" + str(eval(MessageToJson(message._pb.payload['richContent'][0][0]))['link'])
 
             answer = msg
-        print(f"answer: {answer}")
+        print(f"Response: {answer}")
+        print(
+            "Detected intent: {} (confidence: {})".format(
+                response.query_result.intent.display_name,
+                response.query_result.intent_detection_confidence,
+            )
+        )
         return answer
 
+
+@csrf_exempt
+def emotion_analysis(request):
+    if(request.method == "POST"):
+        msgImg = request.body.decode('utf-8')
+        img_path = msgImg
+        demography = DeepFace.analyze(img_path)
+        # including angry, fear, neutral, sad, disgust, happy and surprise
+        emotion = demography['dominant_emotion']
+        print(f"emotion: {emotion}")
+        response_obj = {}
+        response_obj['res']=emotion
+        return JsonResponse(response_obj)
+    return render(request, "index.html", {'emotion': emotion})

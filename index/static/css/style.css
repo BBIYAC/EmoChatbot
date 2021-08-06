@@ -18,6 +18,14 @@
     padding: 0;
     box-sizing: inherit;
   }
+
+  a,
+  a:link, 
+  a:visited{
+    color: black;
+    text-decoration: none;
+  }
+
   
   body {
     display: flex;
@@ -58,6 +66,11 @@
     height: 21.33px;
     color: #B1B1B1;
   }
+
+  .msger-header-prev:hover,
+  .msger-header-setting:hover {
+    cursor: pointer;
+  }
   
   .msger-chat {
     flex: 1;
@@ -96,7 +109,7 @@
   }
 
   .msg-bubble {
-    max-width: 450px;
+    max-width: 200px;
     padding: 15px;
     border-radius: 15px;
     background: var(--left-msg-bg);
@@ -125,11 +138,22 @@
     border: 1px solid #B1B1B1;
     border-radius: 15px;
     background-color: var(--msger-bg);
-    padding: 10px;
+    padding: 10px 20px;
     margin-left: 60px;
     font-size: 1em;
   }
-  .msg-image-button{
+
+  .msg-link-button{
+    border: 1px solid #B1B1B1;
+    border-radius: 15px;
+    background-color: var(--msger-bg);
+    padding: 10px 20px;
+    margin-left: 10px;
+    font-size: 1em;
+  }
+
+  .msg-link-button:hover,
+  .msg-image-button:hover{
     cursor: pointer;
   }
   
