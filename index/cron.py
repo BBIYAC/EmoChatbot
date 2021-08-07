@@ -8,7 +8,7 @@ def notice_with_email():
     # 세션생성, 로그인
     s = smtplib.SMTP('smtp.gmail.com', 587)
     s.starttls()
-    s.login('kiy7833@gmail.com', 'dbiknhbqfpxqayaj')
+    s.login('kiy7833@gmail.com', '앱 비밀번호')
 
     # 제목, 본문 작성
     msg = MIMEMultipart()
