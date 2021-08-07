@@ -39,6 +39,7 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'django_crontab',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,6 +47,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'index',
+]
+
+# 매일 같은 시간에 cron.py 실행
+CRONJOBS = [
+    ('* * * * *', 'index.cron.notice_with_email', '>> /index/notice.log'),
 ]
 
 MIDDLEWARE = [

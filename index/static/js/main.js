@@ -194,6 +194,23 @@ function botResponse(rawText) {
 }
 
 
+
+
+
+// Email Send Setting
+const body = get('body');
+const msgerSettingIcon = get('.msger-header-setting');
+const msgerSetting = get('.msger-setting');  
+const msgerSettingSave = get('.msger-setting-save');
+
+document.addEventListener('click', (event) =>{
+  if(event.target == msgerSettingIcon || event.target == msgerSettingSave){
+    msgerSetting.classList.toggle('show');
+  }
+})
+
+
+
 // Utils
 function get(selector, root = document) {
   return root.querySelector(selector);
@@ -205,4 +222,3 @@ function formatDate(date) {
 
   return `${h.slice(-2)}:${m.slice(-2)}`;
 }
-
