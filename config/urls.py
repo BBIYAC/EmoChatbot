@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from . import settings
 
 urlpatterns = [
     path('', include('index.urls')),
     path('admin/', admin.site.urls),
+    path('notice', settings.get_notice_time, name='notice'),
 ]
