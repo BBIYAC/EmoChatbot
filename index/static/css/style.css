@@ -22,7 +22,6 @@
   a,
   a:link, 
   a:visited{
-    color: black;
     text-decoration: none;
   }
 
@@ -135,27 +134,35 @@
   }
 
   .msg-image-button {
-    border: 1px solid #B1B1B1;
     border-radius: 15px;
     background-color: var(--msger-bg);
     padding: 10px 20px;
     margin-left: 60px;
     font-size: 1em;
+    transition:  0.23s;
+    color: var(--right-msg-bg-hover);
+    border: 1px solid var(--right-msg-bg-hover);
+    cursor: pointer;
   }
 
-  .msg-link-button{
+  .disabled{
     border: 1px solid #B1B1B1;
+    color: #B1B1B1;
+    cursor: default;
+  }
+
+
+  .msg-link-button{
     border-radius: 15px;
     background-color: var(--msger-bg);
     padding: 10px 20px;
-    margin-left: 10px;
     font-size: 1em;
-  }
-
-  .msg-link-button:hover,
-  .msg-image-button:hover{
+    color: var(--right-msg-bg-hover);
+    border: 1px solid var(--right-msg-bg-hover);
+    transition:  0.23s;
     cursor: pointer;
   }
+  
   
   .right-msg {
     flex-direction: row-reverse;

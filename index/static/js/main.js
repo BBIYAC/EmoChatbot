@@ -9,15 +9,26 @@ const PERSON_IMG = "https://image.flaticon.com/icons/svg/145/145867.svg";
 const BOT_NAME = "EmoChatBot";
 const PERSON_NAME = "Me";
 
+// const setTime = get('.msger-input-time');
+var today = new Date();   
+var hours = today.getHours(); // 시
 
 
 // 채팅방 입장 시 챗봇 및 이미지 업로드 버튼 출력 => 하루 주기로 변경
 window.onload = function(){
   msgerTitle.innerHTML = "😄 "+ BOT_NAME + " 😄";
+  getImage();
+}
+
+// 챗봇 및 이미지 업로드 버튼 출력
+function getImage(){
   appendImageButton('오늘의 기분을 표현하는 사진을 보내주세요!', '이미지 업로드');
   const msgImg = get('.msg-image-button');
+  const inputImg = get('.msger-input-image');
   msgImg.addEventListener("click", function(){
-    get('.msger-input-image').click();
+    inputImg.click();
+    inputImg.setAttribute('disabled','true');
+    msgImg.classList.add('disabled');
    }); 
   
   var prevBubbleWidth = msgImg.parentElement.previousElementSibling.querySelector('.msg-bubble').offsetWidth + 'px';
@@ -47,7 +58,8 @@ function uploadImg(event) {
     .then(event=>{
       event.json().then((data)=>{
         emotion = data["res"];
-        msgText = `${emotion}<br>기분이 안 좋아 보이네요.<br>어떤 일이 있었나요?` // 감정별 if문 처리
+        console.log("emotion: "+emotion);
+        msgText = `기분이 안 좋아 보이네요.<br>어떤 일이 있었나요?` // 감정별 if문 처리
         appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
         console.log(msgText);
       });
