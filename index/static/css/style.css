@@ -64,7 +64,7 @@
   }
 
   .msger-setting { 
-    display: block; 
+    display: none; 
   }
 
   .msger-setting.show { 
