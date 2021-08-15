@@ -229,7 +229,6 @@ function botResponse(rawText) {
     }
     else{
       var loading = document.querySelector('.loading');
-      console.log(loading);
       msgerChat.removeChild(loading);
       appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
     }

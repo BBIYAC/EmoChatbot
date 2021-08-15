@@ -3,12 +3,18 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
+import datetime
+
+# now = datetime.datetime.now()
+# nowTime = now.strftime('%H:%M') # 12:11
+
 
 def notice_with_email():
     # 세션생성, 로그인
     s = smtplib.SMTP('smtp.gmail.com', 587)
+    s.ehlo()
     s.starttls()
-    s.login('kiy7833@gmail.com', '앱 비밀번호')
+    s.login('kiy7833@gmail.com', 'fokueienpaaiyknl')
 
     # 제목, 본문 작성
     msg = MIMEMultipart()
@@ -26,3 +32,6 @@ def notice_with_email():
     # 메일 전송
     s.sendmail("kiy7833@gmail.com", "dlsdud1757@naver.com", msg.as_string())
     s.quit()
+
+# if nowTime == "20:09":
+#     notice_with_email()
