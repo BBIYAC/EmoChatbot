@@ -64,7 +64,7 @@
   }
 
   .msger-setting { 
-    display: none; 
+    display: block; 
   }
 
   .msger-setting.show { 
@@ -88,14 +88,81 @@
     box-shadow: 0 15px 15px -5px rgba(0, 0, 0, 0.2);
     transform: translateX(-50%) translateY(-50%); 
     animation: fadeIn 0.5s;
-    padding: 40px;
+    padding: 50px;
     text-align: center;
+  }
+
+  .setting-title{
+    display: flex;
+    justify-content: center;
+    height: 40px;
+    color: #666;
+    margin-bottom: 50px;
+    border-bottom: 1px solid #B1B1B1;
+  }
+  .setting-icon{
+    margin-right: 10px;
+    height: 26px;
+  }
+  
+  .setting-time{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 100px;
+  }
+
+  .time-title{
+    font-weight: bold;
+    line-height: 40px;
+  }
+
+  .time-input{
+    display: flex;
+    line-height: 40px;
+  }
+
+  .time-ampm{
+    display: flex;
+    border-radius: 10px;
+    border: 1px solid var(--right-msg-bg);
+    background-color: var(--right-msg-bg);
+    color: #fff;
+    margin-right: 5px;
+    font-size: small;
+  }
+  .time-am,
+  .time-pm{
+    padding: 0 10px;
+  }
+
+  .selected{
+    border-radius: 10px;
+    background-color: var(--right-msg-bg-hover);
+  }
+
+  .time-hhmm{
+    border: 1px solid #666;
+    border-radius: 10px;
+    padding: 0 10px;
+    width: 80px;
   }
 
   .msger-setting-save{
     cursor: pointer;
+    border-radius: 20px;
+    border: 1px solid var(--right-msg-bg);
+    background-color: var(--right-msg-bg);
+    color: #fff;
+    line-height: 40px;
+    width: 100%;
   }
 
+  .msger-setting-save:hover{
+    border: 1px solid var(--right-msg-bg);
+    background-color: #fff;
+    color: var(--right-msg-bg);
+    transition: .1s;
+  }
   
   .msger-header {
     display: flex;

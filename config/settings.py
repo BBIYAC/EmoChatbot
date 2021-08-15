@@ -48,8 +48,7 @@ INSTALLED_APPS = [
 
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-getHour = ""
-getMinute = ""
+
 
 @csrf_exempt
 def get_notice_time(request):
@@ -60,7 +59,8 @@ def get_notice_time(request):
 
 # 매일 같은 시간에 cron.py 실행
 CRONJOBS = [
-    (f'{getMinute} {getHour} * * *', 'index.cron.notice_with_email'),
+    # ('* * * * *', 'index.cron.notice_with_email'),
+    ('* * * * *', 'index.cron.reply'),
 ]
 
 MIDDLEWARE = [

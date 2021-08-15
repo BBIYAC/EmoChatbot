@@ -43,7 +43,49 @@
 
     <div class="msger-setting"> 
       <div class="msger-setting-body">
-        <input type="time">
+        <div class="setting-title">
+          <i class="fas fa-cog setting-icon"></i>
+          <h2>Settings</h2>
+        </div>
+        <div class="setting-time">
+          <p class="time-title">시간</p>
+          <div class="time-input">
+            <div class="time-ampm">
+              <p class="time-am selected">오전</p>
+              <p class="time-pm">오후</p>
+            </div>
+            <!-- <div class="time-hhmm">00:00</div> -->
+            <input class="time-hhmm" list="times" name="times" >
+            <datalist id="times">
+              <option value="00:00">
+              <option value="00:30">
+              <option value="01:00">
+              <option value="01:30">
+              <option value="02:00">
+              <option value="02:30">
+              <option value="03:00">
+              <option value="03:30">
+              <option value="04:00">
+              <option value="04:30">
+              <option value="05:00">
+              <option value="05:30">
+              <option value="06:00">
+              <option value="06:30">
+              <option value="07:00">
+              <option value="07:30">
+              <option value="08:00">
+              <option value="08:30">
+              <option value="09:00">
+              <option value="09:30">
+              <option value="10:00">
+              <option value="10:30">
+              <option value="11:00">
+              <option value="11:30">
+              
+            </datalist>
+          </div>
+          <input type="time" class="time-input-real" hidden>
+        </div>
         <div class="msger-setting-save" onclick="setting_notice_time()">저장</div>
       </div> 
     </div>

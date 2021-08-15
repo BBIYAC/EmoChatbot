@@ -35,3 +35,7 @@ def notice_with_email():
 
 # if nowTime == "20:09":
 #     notice_with_email()
+
+
+def reply():
+    print("This is cron test")
