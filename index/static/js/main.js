@@ -9,6 +9,23 @@ const PERSON_IMG = "https://image.flaticon.com/icons/svg/145/145867.svg";
 const BOT_NAME = "EmoChatBot";
 const PERSON_NAME = "Me";
 
+// Loading
+const msgerLoading = `
+    <div class="msg left-msg loading">
+      <div class="msg-img" style="background-image: url(${BOT_IMG})"></div>
+
+      <div class="msg-bubble">
+        <div class="msg-info">
+          <div class="msg-info-name">${BOT_NAME}</div>
+        </div>
+
+        <div class="dot-pulse"></div>
+      </div>
+      <div class="msg-info-time">${formatDate(new Date())}</div>
+    </div>
+   `;
+
+
 // const setTime = get('.msger-input-time');
 var today = new Date();   
 var hours = today.getHours(); // 시
@@ -16,7 +33,7 @@ var hours = today.getHours(); // 시
 
 // 채팅방 입장 시 챗봇 및 이미지 업로드 버튼 출력 => 하루 주기로 변경
 window.onload = function(){
-  msgerTitle.innerHTML = "😄 "+ BOT_NAME + " 😄";
+  msgerTitle.innerHTML = BOT_NAME;
   getImage();
 }
 
@@ -59,7 +76,30 @@ function uploadImg(event) {
       event.json().then((data)=>{
         emotion = data["res"];
         console.log("emotion: "+emotion);
-        msgText = `기분이 안 좋아 보이네요.<br>어떤 일이 있었나요?` // 감정별 if문 처리
+        // angry, happy, neutral, fear, sad, disgust and surprise
+        if(emotion == "angry"){
+          msgText = `기분이 안 좋아 보이네요.<br>무슨 일이 있었나요?`;
+        }
+        else if(emotion == "happy"){
+          msgText = `행복해 보이네요.<br>좋은 일이 있었나요?`;
+        }
+        else if(emotion == "neutral"){
+          msgText = `무난한 하루였군요!<br>특별한 일은 없었나요?`;
+        }
+        else if(emotion == "fear"){
+          msgText = `얼굴에서 두려움이 느껴져요.<br>오늘 어떤 일이 있었나요?`;
+        }
+        else if(emotion == "sad"){
+          msgText = `오늘은 슬퍼보이네요...<br>저에게 털어놓아도 괜찮아요`;
+        }
+        else if(emotion == "disgust"){
+          msgText = `혐오스러운 표정이네요.<br>안 좋은 일이 있었나요?`;
+        }
+        else{
+          msgText = `오늘 놀라운 일이 있었나요?`;
+        }
+        var loading = document.querySelector('.loading');
+        msgerChat.removeChild(loading);
         appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
         console.log(msgText);
       });
@@ -79,6 +119,7 @@ msgerForm.addEventListener("submit", event => {
   const msgText = msgerInput.value;
   if (!msgText) return;
   appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText);
+  msgerChat.insertAdjacentHTML("beforeend", msgerLoading);
   msgerInput.value = "";
   botResponse(msgText);
 });
@@ -103,7 +144,7 @@ function appendMessage(name, img, side, text) {
     `;
 
   msgerChat.insertAdjacentHTML("beforeend", msgHTML);
-  msgerChat.scrollTop += 500;
+  msgerChat.scrollTop += 500; 
 }
 
 
@@ -138,7 +179,11 @@ function appendImage(uploadImg) {
     `;
 
   msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+  msgerChat.insertAdjacentHTML("beforeend", msgerLoading);
   msgerChat.scrollTop += 500;
+
+  
+  
 }
 
 
@@ -183,6 +228,9 @@ function botResponse(rawText) {
       appendLinkButton(texts)
     }
     else{
+      var loading = document.querySelector('.loading');
+      console.log(loading);
+      msgerChat.removeChild(loading);
       appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
     }
     });
