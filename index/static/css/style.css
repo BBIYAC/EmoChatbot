@@ -112,12 +112,9 @@
   .msger-header-setting {
     height: 21.33px;
     color: #B1B1B1;
-  }
-
-  .msger-header-prev:hover,
-  .msger-header-setting:hover {
     cursor: pointer;
   }
+
   
   .msger-chat {
     flex: 1;

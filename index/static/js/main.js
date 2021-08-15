@@ -242,22 +242,17 @@ function botResponse(rawText) {
 
 
 
-
-
 // Email Send Setting
-const body = get('body');
 const msgerSettingIcon = get('.msger-header-setting');
 const msgerSetting = get('.msger-setting');  
 const msgerSettingSave = get('.msger-setting-save');
 
+function setting_open(){
+  msgerSetting.classList.toggle('show');
+}
 
-
-function send_notice(event){
-  if(event.target == msgerSettingIcon){
-    msgerSetting.classList.toggle('show');
-  }
-  else if(event.target == msgerSettingSave){
-    var myHeader = new Headers();
+function setting_notice_time(){
+  var myHeader = new Headers();
     myHeader.append('Content-Type', 'application/json');
     var getTime = get('input[type="time"]');
     console.log(getTime.value); // 00:00
@@ -271,10 +266,8 @@ function send_notice(event){
       console.log(error);
     })
     msgerSetting.classList.toggle('show');
-  }
 }
 
-document.addEventListener('click', send_notice);
 
 
 // Utils

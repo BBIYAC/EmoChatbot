@@ -30,10 +30,7 @@ DATA_UPLOAD_MAX_MEMORY_SIZE = None
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
 
-ALLOWED_HOSTS = [
-    'emochatbot.herokuapp.com',
-    '127.0.0.1'
-]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -51,6 +48,8 @@ INSTALLED_APPS = [
 
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+getHour = ""
+getMinute = ""
 
 @csrf_exempt
 def get_notice_time(request):
@@ -61,7 +60,7 @@ def get_notice_time(request):
 
 # 매일 같은 시간에 cron.py 실행
 CRONJOBS = [
-    ('* * * * *', 'index.cron.notice_with_email'),
+    (f'{getMinute} {getHour} * * *', 'index.cron.notice_with_email'),
 ]
 
 MIDDLEWARE = [
