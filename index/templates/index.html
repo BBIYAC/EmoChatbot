@@ -1,19 +1,99 @@
-<html>
-<head>
-<title>EmoChatbot</title>
-<meta name="viewport" content="width-device-width, initial-scale=1">
-</head>
-<body>
-    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-    <df-messenger
-      intent="WELCOME"
-      chat-title="EmoChatbot"
-      agent-id="828613f6-4761-4d79-9ba9-920f4d5f2c6e"
-      language-code="ko"
-    ></df-messenger>
-    <center>
-        <h1>EmoChatbot with Dialogflow</h1>
-    </center>
-</body>
-</html>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8">
+  <title>EmoChatbot</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="shortcut icon" href="{% static 'img/chatbot.ico' %}" type="image/x-icon">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+  <script language="javascript">
+    function time(){
+    var time= new Date(); //시간받기위해서 new date
+        document.getElementById("now").innerHTML=time.getHours()+":"+time.getMinutes();
+    }
+  </script>
+
+</head>
+
+<body onload="time()">
+  <!-- partial:index.partial.html -->
+  <section class="msger">
+    <header class="msger-header">
+      <i class="fas fa-chevron-left msger-header-prev"></i>
+      <div class="msger-header-title">
+        
+      </div>
+      <i class="fas fa-ellipsis-h msger-header-setting" onclick="setting_open()"></i>
+    </header>
+
+    <main class="msger-chat">
+
+    </main>
+
+    <form class="msger-inputarea">
+      <input type="text" class="msger-input" id="textInput" placeholder="Enter your message...">
+      <button type="submit" class="msger-send-btn">Send</button>
+    </form>
+
+    <div class="msger-setting"> 
+      <div class="msger-setting-body">
+        <div class="setting-title">
+          <i class="fas fa-cog setting-icon"></i>
+          <h2>Settings</h2>
+        </div>
+        <div class="setting-time">
+          <p class="time-title">시간</p>
+          <div class="time-input">
+            <div class="time-ampm">
+              <p class="time-am selected">오전</p>
+              <p class="time-pm">오후</p>
+            </div>
+            <!-- <div class="time-hhmm">00:00</div> -->
+            <input class="time-hhmm" list="times" name="times" >
+            <datalist id="times">
+              <option value="00:00">
+              <option value="00:30">
+              <option value="01:00">
+              <option value="01:30">
+              <option value="02:00">
+              <option value="02:30">
+              <option value="03:00">
+              <option value="03:30">
+              <option value="04:00">
+              <option value="04:30">
+              <option value="05:00">
+              <option value="05:30">
+              <option value="06:00">
+              <option value="06:30">
+              <option value="07:00">
+              <option value="07:30">
+              <option value="08:00">
+              <option value="08:30">
+              <option value="09:00">
+              <option value="09:30">
+              <option value="10:00">
+              <option value="10:30">
+              <option value="11:00">
+              <option value="11:30">
+              
+            </datalist>
+          </div>
+          <input type="time" class="time-input-real" hidden>
+        </div>
+        <div class="msger-setting-save" onclick="setting_notice_time()">저장</div>
+      </div> 
+    </div>
+  </section>
+  <!-- partial -->
+  <script src='https://use.fontawesome.com/releases/v5.0.13/js/all.js'></script>
+  <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>

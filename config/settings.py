@@ -22,19 +22,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 import os 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-kzvd7=*o7z1$(bqj%u$j((*g-w_-3k(^xxlqbce=f&4h+rcca3')
+credential_path = "credential/emochatbot-aupx-c781ff2d85b6.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]=credential_path
+
+DATA_UPLOAD_MAX_MEMORY_SIZE = None
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
 
-ALLOWED_HOSTS = [
-    'emochatbot.herokuapp.com',
-    '127.0.0.1'
-]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'django_crontab', 
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,6 +44,23 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'index',
+]
+
+from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+
+
+@csrf_exempt
+def get_notice_time(request):
+    if(request.method == "POST"):
+        getTime = request.body.decode('utf-8')
+        print(f"getTime: {getTime}")
+    return render(request, "index.html")
+
+# 매일 같은 시간에 cron.py 실행
+CRONJOBS = [
+    # ('* * * * *', 'index.cron.notice_with_email'),
+    ('* * * * *', 'index.cron.reply'),
 ]
 
 MIDDLEWARE = [
@@ -124,6 +143,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+) 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
