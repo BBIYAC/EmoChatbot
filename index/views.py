@@ -94,4 +94,6 @@ def emotion_analysis(request):
         response_obj = {}
         response_obj['res']=emotion
         return JsonResponse(response_obj)
+    else:
+        print('msg request fail!!')
     return render(request, "index.html")
