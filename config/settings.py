@@ -16,6 +16,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -24,6 +25,7 @@ import os
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-kzvd7=*o7z1$(bqj%u$j((*g-w_-3k(^xxlqbce=f&4h+rcca3')
 credential_path = "credential/emochatbot-aupx-c781ff2d85b6.json"
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"]=credential_path
+
 
 DATA_UPLOAD_MAX_MEMORY_SIZE = None
 
@@ -151,3 +153,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 import dj_database_url 
 db_from_env = dj_database_url.config(conn_max_age=500) 
 DATABASES['default'].update(db_from_env)
+
+CRONTAB_DJANGO_SETTINGS_MODULE = 'index.settings.local_settings'
