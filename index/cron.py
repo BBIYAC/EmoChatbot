@@ -39,7 +39,7 @@ def send_email(userEmail):
 # DB에서 현재 시간과 사용자가 지정한 알림 시간이 같으면 사용자의 Email 가져오기
 def check_send_time():
     # userTime
-    userTime = "23:00" # DB에서 가져오기
+    userTime = "23:30" # DB에서 가져오기
     # userEmail
     userEmail = "dlsdud1757@naver.com" # DB에서 가져오기
 
