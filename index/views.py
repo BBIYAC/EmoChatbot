@@ -83,18 +83,13 @@ class webAPI:
 
 @csrf_exempt
 def emotion_analysis(request):
-    print('emotion analysis function!')
     if(request.method == "POST"):
         msgImg = request.body.decode('utf-8')
-        print('msg request success!!')
         img_path = msgImg
         demography = DeepFace.analyze(img_path)
         # including angry, fear, neutral, sad, disgust, happy and surprise
         emotion = demography['dominant_emotion']
-        print(f"emotion: {emotion}")
         response_obj = {}
         response_obj['res']=emotion
         return JsonResponse(response_obj)
-    else:
-        print('msg request fail!!')
     return render(request, "index.html")
