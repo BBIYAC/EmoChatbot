@@ -47,7 +47,7 @@ def check_send_time():
     #     send_email(userEmail)
     send_email(userEmail)
 
-
+check_send_time()
 
 def reply():
     print("This is cron test")
