@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from index.cron import reply
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -60,8 +61,8 @@ def get_notice_time(request):
 
 # 매일 같은 시간에 cron.py 실행
 CRONJOBS = [
-    ('* * * * *', 'index.cron.notice_with_email', '>> /var/log/crontab.log'),
-    ('* * * * *', 'index.cron.reply', '>> /var/log/crontab.log')
+    # ('* * * * *', 'index.cron.notice_with_email', '>> /var/log/crontab.log'),
+    ('* * * * *', reply, '>> /var/log/crontab.log')
 ]
 
 MIDDLEWARE = [
