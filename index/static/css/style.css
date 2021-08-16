@@ -138,6 +138,7 @@
   .selected{
     border-radius: 10px;
     background-color: var(--right-msg-bg-hover);
+    transition: .2s;
   }
 
   .time-hhmm{

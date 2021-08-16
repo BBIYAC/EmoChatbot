@@ -93,3 +93,12 @@ def emotion_analysis(request):
         response_obj['res']=emotion
         return JsonResponse(response_obj)
     return render(request, "index.html")
+
+
+
+@csrf_exempt
+def get_notice_time(request):
+    if(request.method == "POST"):
+        getTime = request.body.decode('utf-8')
+        print(f"getTime: {getTime}")
+    return render(request, "index.html")

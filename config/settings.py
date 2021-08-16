@@ -46,21 +46,13 @@ INSTALLED_APPS = [
     'django_crontab', 
 ]
 
-from django.shortcuts import render
-from django.views.decorators.csrf import csrf_exempt
 
 
-@csrf_exempt
-def get_notice_time(request):
-    if(request.method == "POST"):
-        getTime = request.body.decode('utf-8')
-        print(f"getTime: {getTime}")
-    return render(request, "index.html")
 
-
-# 매일 같은 시간에 cron.py 실행
+# 매일 같은 시간에 사용자가 지정한 시간 확인하여 cron.py 실행
+# DB와 비교하여 send_mail 실행 
 CRONJOBS = [
-    # ('* * * * *', 'index.cron.notice_with_email', '>> /var/log/crontab.log')
+    # ('* * * * *', 'index.cron.check_send_time', '>> /var/log/crontab.log')
     ('* * * * *', 'index.cron.reply', '>> /var/log/crontab.log')
 ]
 
