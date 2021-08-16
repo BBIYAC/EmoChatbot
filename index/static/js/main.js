@@ -258,6 +258,11 @@ function setting_notice_time(){
     if (getampm == '오후'){
       gethhmm = String(parseInt(gethhmm.substr(0,2)) + 12)+gethhmm.substr(2,5);
     }
+    else{
+      if(gethhmm.substr(0,2)=="12"){
+        gethhmm = String(parseInt(gethhmm.substr(0,2)) - 12)+gethhmm.substr(2,5);
+      }
+    }
     console.log('getTime: '+ gethhmm ); // 00:00
 
     fetch('notice',{
