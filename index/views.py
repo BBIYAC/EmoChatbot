@@ -83,6 +83,7 @@ class webAPI:
 
 @csrf_exempt
 def emotion_analysis(request):
+    print('emotion analysis function!')
     if(request.method == "POST"):
         msgImg = request.body.decode('utf-8')
         print('msg request success!!')

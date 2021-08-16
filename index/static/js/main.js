@@ -60,17 +60,15 @@ function uploadImg(event) {
   reader.onload = function(event) { 
     appendImage(event.target.result); // event.target.result : 바이트 형태
 
-    // setTimeout(function() { // 시간 지연 함수
-    //   appendMessage(BOT_NAME, BOT_IMG, "left", '이미지 분석 중입니다<br>잠시만 기다려주세요!');
-    // }, 1000);
 
     var myHeader = new Headers();
     myHeader.append('Content-Type', 'application/json');
+    imgURL = event.target.result.toString();
 
     fetch('analysis',{
       method: 'POST',
       headers: myHeader,
-      body: event.target.result.toString(),
+      body: imgURL,
     })
     .then(event=>{
       event.json().then((data)=>{
@@ -225,7 +223,7 @@ function botResponse(rawText) {
     console.log(msgText);
     var loading = document.querySelector('.loading');
     msgerChat.removeChild(loading);
-    
+
     if(msgText.includes("http")){
       texts = msgText.split('<br>');
       appendLinkButton(texts)
