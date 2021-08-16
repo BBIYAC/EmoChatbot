@@ -152,6 +152,11 @@
     display: none; /* Chrome, Safari, Opera*/
 }
 
+  .time-hhmm-group {
+    width: 80px;
+    height: 200px;
+  }
+
   .msger-setting-save{
     cursor: pointer;
     border-radius: 20px;
