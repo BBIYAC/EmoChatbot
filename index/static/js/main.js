@@ -223,13 +223,14 @@ function botResponse(rawText) {
     event.json().then((data)=>{
     msgText = data["res"];
     console.log(msgText);
+    var loading = document.querySelector('.loading');
+    msgerChat.removeChild(loading);
+    
     if(msgText.includes("http")){
       texts = msgText.split('<br>');
       appendLinkButton(texts)
     }
     else{
-      var loading = document.querySelector('.loading');
-      msgerChat.removeChild(loading);
       appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
     }
     });

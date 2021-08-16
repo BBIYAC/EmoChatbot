@@ -85,6 +85,7 @@ class webAPI:
 def emotion_analysis(request):
     if(request.method == "POST"):
         msgImg = request.body.decode('utf-8')
+        print('msg request success!!')
         img_path = msgImg
         demography = DeepFace.analyze(img_path)
         # including angry, fear, neutral, sad, disgust, happy and surprise
