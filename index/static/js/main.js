@@ -254,19 +254,39 @@ function setting_open(){
 function setting_notice_time(){
   var myHeader = new Headers();
     myHeader.append('Content-Type', 'application/json');
-    var getTime = get('input[type="time"]');
-    console.log(getTime.value); // 00:00
+    var getampm = get('.selected').innerText;
+    var gethhmm = get('.time-hhmm').value;
+    if (getampm == '오후'){
+      gethhmm = String(parseInt(gethhmm.substr(0,2)) + 12)+gethhmm.substr(2,5);
+    }
+    console.log('getTime: '+ gethhmm ); // 00:00
 
     fetch('notice',{
       method: 'POST',
       headers: myHeader,
-      body: getTime.value,
+      body: gethhmm,
     })
     .catch(error=>{
       console.log(error);
     })
     msgerSetting.classList.toggle('show');
 }
+
+var am = get('.time-am');
+var pm = get('.time-pm');
+am.addEventListener('click', function(){  
+  if(!am.classList.contains('selected')){
+    am.classList.add('selected');
+    pm.classList.remove('selected');
+  }
+});
+pm.addEventListener('click', function(){  
+  if(!pm.classList.contains('selected')){
+    pm.classList.add('selected');
+    am.classList.remove('selected');
+  }
+});
+
 
 
 

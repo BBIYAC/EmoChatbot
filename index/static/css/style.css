@@ -145,7 +145,12 @@
     border-radius: 10px;
     padding: 0 10px;
     width: 80px;
+    background-color: #fff;
   }
+
+  .time-hhmm::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}
 
   .msger-setting-save{
     cursor: pointer;
