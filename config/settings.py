@@ -60,7 +60,7 @@ def get_notice_time(request):
 # 매일 같은 시간에 cron.py 실행
 CRONJOBS = [
     # ('* * * * *', 'index.cron.notice_with_email'),
-    ('* * * * *', 'index.cron.reply'),
+    ('*/1 * * * *', 'index.cron.reply')
 ]
 
 MIDDLEWARE = [
