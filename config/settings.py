@@ -36,7 +36,6 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'django_crontab', 
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'index',
+    'django_crontab', 
 ]
 
 from django.shortcuts import render
@@ -57,10 +57,11 @@ def get_notice_time(request):
         print(f"getTime: {getTime}")
     return render(request, "index.html")
 
+
 # 매일 같은 시간에 cron.py 실행
 CRONJOBS = [
-    # ('* * * * *', 'index.cron.notice_with_email'),
-    ('*/1 * * * *', 'index.cron.reply')
+    ('* * * * *', 'index.cron.notice_with_email', '>> /var/log/crontab.log'),
+    ('* * * * *', 'index.cron.reply', '>> /var/log/crontab.log')
 ]
 
 MIDDLEWARE = [
