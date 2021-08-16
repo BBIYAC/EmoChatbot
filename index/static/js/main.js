@@ -64,7 +64,6 @@ function uploadImg(event) {
     var myHeader = new Headers();
     myHeader.append('Content-Type', 'application/json');
     imgURL = event.target.result.toString();
-    console.log(imgURL);
 
     fetch('analysis',{
       method: 'POST',

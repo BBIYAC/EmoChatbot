@@ -88,9 +88,9 @@ def emotion_analysis(request):
         print('img request')
         msgImg = request.body.decode('utf-8')
         img_path = msgImg
-        print('img url')
+        print(img_path)
         demography = DeepFace.analyze(img_path)
-        print('deepface mmodel')
+        print('deepface model')
         # including angry, fear, neutral, sad, disgust, happy and surprise
         emotion = demography['dominant_emotion']
         response_obj = {}
