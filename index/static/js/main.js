@@ -153,7 +153,7 @@ function appendImageButton(text, button) {
       <button class="msg-image-button">
         <div class="msg-text">${button}</div>
       </button>
-      <input type="file" class="msger-input-image" accept="img/*" required multiple onchange="uploadImg(event);"></input>
+      <input type="file" class="msger-input-image" accept="img/*" required multiple onchange="uploadImg(event);" capture="camera"></input>
     </div>
     `;
 
