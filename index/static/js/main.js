@@ -40,7 +40,8 @@ window.onload = function(){
 // 챗봇 및 이미지 업로드 버튼 출력
 function getImage(){
   appendImageButton('오늘의 기분을 표현하는 사진을 보내주세요!', '이미지 업로드');
-  get('.msg-image-button').addEventListener("click", function(){
+  const msgImg = get('.msg-image-button');
+  msgImg.addEventListener("click", function(){
     get('.msger-input-image').click();
   }); 
   
