@@ -3,9 +3,9 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
-from django.utils import timezone
+import datetime
 
-now = timezone.now()
+now = datetime.datetime.now()
 nowTime = now.strftime('%H:%M') # 00:00
 
 
@@ -39,13 +39,13 @@ def send_email(userEmail):
 # DB에서 현재 시간과 사용자가 지정한 알림 시간이 같으면 사용자의 Email 가져오기
 def check_send_time():
     # userTime
-    userTime = "21:35" # DB에서 가져오기
+    userTime = "22:13" # DB에서 가져오기
     # userEmail
     userEmail = "dlsdud1757@naver.com" # DB에서 가져오기
 
-    if nowTime == userTime:
-        send_email(userEmail)
-
+    # if nowTime == userTime:
+    #     send_email(userEmail)
+    send_email(userEmail)
 
 
 
