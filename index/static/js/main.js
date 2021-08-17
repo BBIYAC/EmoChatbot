@@ -310,7 +310,7 @@ window.addEventListener("load",function(){
     
   });
 
-  $('.msger').click(function(){
+  $('.msger-chat').click(function(){
     setTimeout(function(){
       $('.msger').height(originalHeight);
     }, 1000)

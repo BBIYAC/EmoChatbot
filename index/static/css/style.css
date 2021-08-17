@@ -167,6 +167,13 @@
     padding: 0 10px;
     width: 80px;
     background-color: #fff;
+    -webkit-appearance: none;
+    -moz-appearance: none; 
+    appearance: none;
+
+    /*화살표 배경 넣기*/
+    background: #fff url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAYFBMVEX///8AAACOjo7z8/OLi4vt7e36+vo1NTUhISE5OTnw8PDk5OQkJCQfHx+BgYGGhoaoqKhaWlrX19eenp5MTEwwMDCurq55eXlfX1/AwMDT09PMzMxoaGhAQEBFRUWXl5fOqQqgAAAClElEQVR4nO3bjXLaMAzA8ZoQaGELHy2027r2/d9ypD6vJLFN4oiLlfv/HsAnVRISd/ThAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADO1PS+q5Xkr/ep+97rbS7+a4ngw1tvxHq8eJF9N8mm+PYu9+nz16l7s1SQ7c20p9Oqy8arcHy7BL9O0EHl10Xr1t8irSVY/zR1SbCdongQeTdQuoUijLruP/hGINc17N5jRKXYqeFGJRJviryeakY3qS9AchOIdrDj5whmVojdB8yEW8kCrtTeeEY3qmcHai2DQwxz8ASVX0V9BY95Fox7iMxBRYoqhBM1ZOO7+tqGQkho10KIXhXjkvVWCKYYTnPJsW/k/TWtDGzXYotN9kn4pfwilGE7wacIerW0eg6ENadRwi64nTvCy9iVSDFdwvbpj7D1txjdqvi1qlWOrGKlgFglGq9gnxcgMZtCiVtH5Jvzf7UYNV/CUTYKjlkbuM+iU4SrGGzXnNdGUuDQ0zKCTtDQiLZpdgkmzqGUGncEHnJ4ZdCJLw5di3qea36BG1dai1oClkf+p5lf0PeA0rYmmngecxhl0es2izhl0esyivjXRdPOA09yi1o0DTneLWpFv/Qu1a6IpcsC9hBNU0qJWZGmE5PSNvo/I0vDTM4NOZGl4K6guwegB16VrBp3Ix808Ehwwi/pm0OlZRU17sC1ywOlvUStywOlvUStywOlvUetGFXW3qBU94LSdan6RpaF9Bp3gAafxVPMLLI05zKDjXf1zStA7i3OZQadTRf17sK21NObVolZ5/Ru4j9lVsFZ8//C9mmEFvxxf6w+cU5XD/2vdTbndTB0CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAj4B+QmE/c7heciAAAAAElFTkSuQmCC') no-repeat right;
+    background-size: 20px;
   }
 
   .time-hhmm::-webkit-scrollbar {
