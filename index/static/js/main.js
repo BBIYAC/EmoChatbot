@@ -244,6 +244,12 @@ const msgerSettingIcon = get('.msger-header-setting');
 const msgerSetting = get('.msger-setting');  
 const msgerSettingSave = get('.msger-setting-save');
 
+msgerSetting.addEventListener('click', (event) => {
+  if (event.target === msgerSetting) {
+    msgerSetting.classList.toggle('show');
+  }
+});
+
 function setting_open(){
   msgerSetting.classList.toggle('show');
 }
