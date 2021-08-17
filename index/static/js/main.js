@@ -244,7 +244,7 @@ const msgerSettingIcon = get('.msger-header-setting');
 const msgerSetting = get('.msger-setting');  
 const msgerSettingSave = get('.msger-setting-save');
 
-function setting_open(){
+function setting_toggle(){
   msgerSetting.classList.toggle('show');
 }
 
