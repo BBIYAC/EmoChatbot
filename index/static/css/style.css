@@ -25,15 +25,18 @@
     text-decoration: none;
   }
 
+  html{
+    height: 100%;
+  }
   
   body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100%;
     background-image: var(--body-bg);
     font-family: Helvetica, sans-serif;
-    overflow: hidden;
+    
   }
   
 
@@ -49,6 +52,8 @@
     border-radius: 5px;
     background: var(--msger-bg);
     box-shadow: 0 15px 15px -5px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    overflow: hidden;
   }
 
   @keyframes fadeIn{
