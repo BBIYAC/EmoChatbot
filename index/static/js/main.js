@@ -300,19 +300,19 @@ pm.addEventListener('click', function(){
 
 window.addEventListener("load",function(){
   // 처음 시작시 화면의 사이즈 값을 가진다.
-  var originalHeight = $('body').height();
+  var originalHeight = $(window).height();
    
   // 창의 사이즈 변화가 일어났을 경우 실행된다.
   $('.msger-input').click(function() {
     setTimeout(function(){
-      $('.msger').height($('body').height());
+      $('.msger').height($(window).height());
     }, 1000)
     
   });
 
   $('.msger').click(function(){
     setTimeout(function(){
-      $('.msger').height(originalHeight)
+      $('.msger').height(originalHeight);
     }, 1000)
   });
 });
