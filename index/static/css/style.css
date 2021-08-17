@@ -447,14 +447,10 @@
   }
 
   .msger-setting-body{
-    position: absolute; 
-    top: 85%; 
-    left: 50%; 
     width: 100%;
-    transform: translateX(-50%) translateY(-50%); 
   }
 
   .setting-time{
-    margin-bottom: 80px;
+    margin-bottom: 70px;
   }
 }
