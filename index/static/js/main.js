@@ -307,6 +307,7 @@ window.addEventListener("load",function(){
   $('.msger-input').click(function() {
     setTimeout(function(){
       msger.style.height = $(window).height(); 
+      alert(msger.style.height);
     }, 1000)
     
   });
@@ -314,6 +315,7 @@ window.addEventListener("load",function(){
   $('.msger').click(function(){
     setTimeout(function(){
       msger.style.height = originalHeight; 
+      alert(msger.style.height);
     }, 1000)
   });
 });
