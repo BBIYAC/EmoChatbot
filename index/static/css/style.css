@@ -202,6 +202,7 @@
     border-bottom: var(--border);
     background: #eee;
     color: #666;
+    height: 45px;
   }
 
   .msger-header-prev,
@@ -444,6 +445,23 @@
   .msger{
     width: 100%;
     height: 100%;
+  }
+  .msger-header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .msger-chat{
+    margin-top: 45px;
+  }
+
+  .msger-inputarea{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
   }
 
   .msger-setting-body{
