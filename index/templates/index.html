@@ -22,14 +22,13 @@
 </head>
 
 <body onload="time()">
-  <!-- partial:index.partial.html -->
   <section class="msger">
     <header class="msger-header">
       <i class="fas fa-chevron-left msger-header-prev"></i>
       <div class="msger-header-title">
         
       </div>
-      <i class="fas fa-ellipsis-h msger-header-setting" onclick="setting_toggle()"></i>
+      <i class="fas fa-ellipsis-h msger-header-setting" onclick="setting_open()"></i>
     </header>
 
     <main class="msger-chat">
@@ -55,7 +54,6 @@
               <p class="time-am selected">오전</p>
               <p class="time-pm">오후</p>
             </div>
-            <!-- <input class="time-hhmm" list="times" name="times" value="00:00"> -->
             <select class="time-hhmm" name="times">
               <option value="00:00">12:00</option>
               <option value="00:30">12:30</option>
