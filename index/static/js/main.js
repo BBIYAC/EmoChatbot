@@ -239,6 +239,8 @@ function botResponse(rawText) {
 
 
 
+
+
 // Email Send Setting
 const msgerSettingIcon = get('.msger-header-setting');
 const msgerSetting = get('.msger-setting');  
@@ -295,9 +297,28 @@ pm.addEventListener('click', function(){
   }
 });
 
+const msger = get('.msger');
+
 window.addEventListener("load",function(){
-  setTimeout(scrollTo,0,0,1);
-  },false);
+  // 처음 시작시 화면의 사이즈 값을 가진다.
+  var originalHeight = $(window).height();
+   
+  // 창의 사이즈 변화가 일어났을 경우 실행된다.
+  $(window).resize(function() {
+     
+    // 처음 사이즈와 현재 사이즈가 변경된 경우
+    // 키보드가 올라온 경우
+    if($(window).height() != originalHeight) {
+       msger.style.height = $(window).height();
+    }
+   
+    // 처음 사이즈와 현재 사이즈가 동일한 경우
+    // 키보드가 다시 내려간 경우
+    else {
+      msger.style.height = $(window).height()
+    }
+  });
+});
 
 
 
