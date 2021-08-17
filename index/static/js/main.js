@@ -297,25 +297,22 @@ pm.addEventListener('click', function(){
   }
 });
 
-const msger = get('.msger');
 
 window.addEventListener("load",function(){
   // 처음 시작시 화면의 사이즈 값을 가진다.
-  var originalHeight = $(window).height();
+  var originalHeight = $('body').height();
    
   // 창의 사이즈 변화가 일어났을 경우 실행된다.
   $('.msger-input').click(function() {
     setTimeout(function(){
-      msger.style.height = $(window).height(); 
-      alert(msger.style.height);
+      $('.msger').height($('body').height());
     }, 1000)
     
   });
 
   $('.msger').click(function(){
     setTimeout(function(){
-      msger.style.height = originalHeight; 
-      alert(msger.style.height);
+      $('.msger').height(originalHeight)
     }, 1000)
   });
 });
