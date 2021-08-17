@@ -9,8 +9,20 @@ from google.protobuf.json_format import MessageToJson
 from google.api_core.exceptions import InvalidArgument
 import ast
 
-from deepface import DeepFace
+# from deepface import DeepFace
+
+# convert url to jpg & save img file
+from PIL import Image
+from urllib import request as req
+from io import BytesIO
+
+# emotion analysis model
+from fer import FER
+import matplotlib.pyplot as plt
+
+# remove img file
 import os
+
 
 
 @csrf_exempt
@@ -81,16 +93,44 @@ class webAPI:
         return answer
 
 
+# @csrf_exempt
+# def emotion_analysis(request):
+#     if(request.method == "POST"):
+#         msgImg = request.body.decode('utf-8')
+#         img_path = msgImg
+#         demography = DeepFace.analyze(img_path)
+#         # including angry, fear, neutral, sad, disgust, happy and surprise
+#         emotion = demography['dominant_emotion']
+#         response_obj = {}
+#         response_obj['res']=emotion
+#         return JsonResponse(response_obj)
+#     return render(request, "index.html")
+
 @csrf_exempt
 def emotion_analysis(request):
     if(request.method == "POST"):
         msgImg = request.body.decode('utf-8')
-        img_path = msgImg
-        demography = DeepFace.analyze(img_path)
+        imgURL = msgImg
+        print(os.path.realpath(__file__))
+        response = req.urlopen(imgURL).read()
+        img = Image.open(BytesIO(response))
+
+        # converting to jpg
+        convert_img = img.convert("RGB")
+        convert_img.save("emotion.jpg")
+        print('convert success & save')
+
+        # emotion analysis model
+        img = plt.imread("emotion.jpg")
+        detector = FER()
         # including angry, fear, neutral, sad, disgust, happy and surprise
-        emotion = demography['dominant_emotion']
+        emotion, score = detector.top_emotion(img)
         response_obj = {}
         response_obj['res']=emotion
+        print(F'emotion: {emotion}')
+
+        # remove img file
+        os.remove("emotion.jpg")
         return JsonResponse(response_obj)
     return render(request, "index.html")
 
