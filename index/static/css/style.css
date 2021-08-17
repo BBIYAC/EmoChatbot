@@ -131,7 +131,7 @@
   .setting-time{
     display: flex;
     justify-content: space-between;
-    margin: 0 auto 100px auto;
+    margin: 0 auto 30% auto;
   }
 
   .time-title{
