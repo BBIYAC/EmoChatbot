@@ -304,19 +304,17 @@ window.addEventListener("load",function(){
   var originalHeight = $(window).height();
    
   // 창의 사이즈 변화가 일어났을 경우 실행된다.
-  $(window).resize(function() {
-     
-    // 처음 사이즈와 현재 사이즈가 변경된 경우
-    // 키보드가 올라온 경우
-    if($(window).height() != originalHeight) {
-       msger.style.height = $(window).height();
-    }
-   
-    // 처음 사이즈와 현재 사이즈가 동일한 경우
-    // 키보드가 다시 내려간 경우
-    else {
-      msger.style.height = $(window).height()
-    }
+  $('.msger-input').click(function() {
+    setTimeout(function(){
+      msger.style.height = $(window).height(); 
+    }, 1000)
+    
+  });
+
+  $('.msger').click(function(){
+    setTimeout(function(){
+      msger.style.height = originalHeight; 
+    }, 1000)
   });
 });
 
