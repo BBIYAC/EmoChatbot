@@ -33,7 +33,7 @@
     height: 100vh;
     background-image: var(--body-bg);
     font-family: Helvetica, sans-serif;
-    overflow: hidden;
+    overflow: auto;
   }
   
 
@@ -121,17 +121,11 @@
     width: 100%;
   }
 
-
-  .setting-icon{
-    margin-right: 10px;
-    height: 26px;
-    display: none;
-  }
   
   .setting-time{
     display: flex;
     justify-content: space-between;
-    margin: 0 auto 30% auto;
+    margin: 0 auto 15% auto;
   }
 
   .time-title{
