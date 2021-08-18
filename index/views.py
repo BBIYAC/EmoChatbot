@@ -112,6 +112,8 @@ def emotion_analysis(request):
         emotion, score = detector.top_emotion(img)
         response_obj = {}
         response_obj['res']=emotion
+        if str(emotion) == "None":
+            emotion = '감정 분석 실패'
         print(F'emotion: {emotion}')
 
         # remove img file

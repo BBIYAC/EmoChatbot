@@ -34,21 +34,9 @@ var hours = today.getHours(); // 시
 // 채팅방 입장 시 챗봇 및 이미지 업로드 버튼 출력 => 하루 주기로 변경
 window.onload = function(){
   msgerTitle.innerHTML = BOT_NAME;
-  getImage();
-}
-
-// 챗봇 및 이미지 업로드 버튼 출력
-function getImage(){
   appendImageButton('오늘의 기분을 표현하는 사진을 보내주세요!', '이미지 업로드');
-  const msgImg = get('.msg-image-button');
-  msgImg.addEventListener("click", function(){
-    get('.msger-input-image').click();
-  }); 
-  
-  var prevBubbleWidth = msgImg.parentElement.previousElementSibling.querySelector('.msg-bubble').offsetWidth + 'px';
-  msgImg.style.width = prevBubbleWidth;
-
 }
+
 
 
 //  이미지 업로드 시 채팅에 이미지 출력
@@ -56,8 +44,12 @@ function uploadImg(event) {
   var reader = new FileReader(); 
   reader.onload = function(event) { 
     appendImage(event.target.result); // event.target.result : 바이트 형태
-    get('.msger-input-image').setAttribute('disabled','true');
-    get('.msg-image-button').classList.add('disabled'); 
+    var upload = document.querySelectorAll('.msg-image-button');
+    var msgImg = upload[upload.length-1];
+    var input = document.querySelectorAll('.msger-input-image');
+    var inputImg = input[input.length-1];
+    inputImg.setAttribute('disabled','true');
+    msgImg.classList.add('disabled'); 
 
     var myHeader = new Headers();
     myHeader.append('Content-Type', 'application/json');
@@ -72,32 +64,40 @@ function uploadImg(event) {
       event.json().then((data)=>{
         emotion = data["res"];
         console.log("emotion: "+emotion);
-        // angry, happy, neutral, fear, sad, disgust and surprise
-        if(emotion == "angry"){
-          msgText = `기분이 안 좋아 보이네요.<br>무슨 일이 있었나요?`;
-        }
-        else if(emotion == "happy"){
-          msgText = `행복해 보이네요.<br>좋은 일이 있었나요?`;
-        }
-        else if(emotion == "neutral"){
-          msgText = `무난한 하루였군요!<br>특별한 일은 없었나요?`;
-        }
-        else if(emotion == "fear"){
-          msgText = `얼굴에서 두려움이 느껴져요.<br>오늘 어떤 일이 있었나요?`;
-        }
-        else if(emotion == "sad"){
-          msgText = `오늘은 슬퍼보이네요...<br>저에게 털어놓아도 괜찮아요`;
-        }
-        else if(emotion == "disgust"){
-          msgText = `혐오스러운 표정이네요.<br>안 좋은 일이 있었나요?`;
+        var loading = document.querySelector('.loading');
+        
+        if(String(emotion) == "null"){ // 감정 분석 실패한 경우
+          msgerChat.removeChild(loading);
+          appendImageButton('얼굴이 제대로 나오도록 다시 보내주세요!', '이미지 업로드');
+          console.log('이미지 재업로드');
         }
         else{
-          msgText = `오늘 놀라운 일이 있었나요?`;
-        }
-        var loading = document.querySelector('.loading');
-        msgerChat.removeChild(loading);
-        appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
-        console.log(msgText);
+          // angry, happy, neutral, fear, sad, disgust and surprise
+          if(emotion == "angry"){
+            msgText = `기분이 안 좋아 보이네요.<br>무슨 일이 있었나요?`;
+          }
+          else if(emotion == "happy"){
+            msgText = `행복해 보이네요.<br>좋은 일이 있었나요?`;
+          }
+          else if(emotion == "neutral"){
+            msgText = `무난한 하루였군요!<br>특별한 일은 없었나요?`;
+          }
+          else if(emotion == "fear"){
+            msgText = `얼굴에서 두려움이 느껴져요.<br>오늘 어떤 일이 있었나요?`;
+          }
+          else if(emotion == "sad"){
+            msgText = `오늘은 슬퍼보이네요...<br>저에게 털어놓아도 괜찮아요`;
+          }
+          else if(emotion == "disgust"){
+            msgText = `혐오스러운 표정이네요.<br>안 좋은 일이 있었나요?`;
+          }
+          else{
+            msgText = `오늘 놀라운 일이 있었나요?`;
+          }
+          msgerChat.removeChild(loading);
+          appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
+          console.log(msgText);
+        } 
       });
     })
     .catch(error=>{
@@ -159,6 +159,17 @@ function appendImageButton(text, button) {
 
   msgerChat.insertAdjacentHTML("beforeend", msgHTML);
   msgerChat.scrollTop += 500;
+
+  var upload = document.querySelectorAll('.msg-image-button');
+  var msgImg = upload[upload.length-1];
+  var input = document.querySelectorAll('.msger-input-image');
+  var inputImg = input[input.length-1];
+  msgImg.addEventListener("click", function(){
+    inputImg.click();
+  }); 
+  
+  var prevBubbleWidth = msgImg.parentElement.previousElementSibling.querySelector('.msg-bubble').offsetWidth + 'px';
+  msgImg.style.width = prevBubbleWidth;
 }
 
 
