@@ -24,6 +24,11 @@ import matplotlib.pyplot as plt
 import os
 
 
+@csrf_exempt
+def auth(request):
+    return render(request, 'auth.html')
+    
+
 
 @csrf_exempt
 def index(request):
