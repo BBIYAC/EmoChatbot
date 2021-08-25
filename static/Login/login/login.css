@@ -1,0 +1,37 @@
+a:link { color: red; text-decoration: none;}
+a:visited { color: black; text-decoration: none;}
+a:hover { color: none; text-decoration: none;}
+
+.login-container-position {
+    /* background-color: blueviolet; */
+    height: 100vh;
+}
+
+.login-inside {
+    height: 500px;
+}
+body{
+    overflow-x: hidden;
+}
+
+#videobcg {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1000;
+    overflow:hidden;
+}
+
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    position: absolute;
+    text-align: center;
+}
+
