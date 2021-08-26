@@ -18,6 +18,12 @@ login.addEventListener('click', () => {
     const password = document.getElementById('ps');
     var header = new Headers();
     header.append('Content-Type', 'application/json');
+    header.append('Access-Control-Allow-Origin', 'http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000');
+    header.append('Access-Control-Allow-Credentials', 'true');
+    header.append('Access-Control-Allow-Headers', 'Origin');
+    header.append('Access-Control-Allow-Headers', 'Accept');
+    header.append('GET', 'POST', 'OPTIONS');
+
 
     let data ={
         username : username.value,

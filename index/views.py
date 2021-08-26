@@ -112,7 +112,7 @@ def emotion_analysis(request):
 
         # emotion analysis model
         img = plt.imread("emotion.jpg")
-        detector = FER()
+        detector = FER(mtcnn=True)
         # including angry, fear, neutral, sad, disgust, happy and surprise
         emotion, score = detector.top_emotion(img)
         response_obj = {}
@@ -124,13 +124,4 @@ def emotion_analysis(request):
         # remove img file
         os.remove("emotion.jpg")
         return JsonResponse(response_obj)
-    return render(request, "index.html")
 
-
-
-@csrf_exempt
-def get_notice_time(request):
-    if(request.method == "POST"):
-        getTime = request.body.decode('utf-8')
-        print(f"getTime: {getTime}")
-    return render(request, "index.html")
