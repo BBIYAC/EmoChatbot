@@ -10,6 +10,18 @@ header.append('Content-Type', 'application/json');
 
 // location.href = "/chatting/"
 
+function checkIfPassed2DaysORNot(){
+    var currentTime = new Date();
+    let passedHours = currentTime.getTime()/(1000*3600) - localStorage.getItem('logined_time')/(1000*3600);
+  
+    if(passedHours > 48){
+      localStorage.removeItem('logined_time');
+      localStorage.removeItem('login_token');
+      localStorage.removeItem('nickname');
+    }
+  
+  }
+
 function ifLogined(){
     let loginPromise = new Promise((resolve,reject)=>{
         if (localStorage.getItem('login_token') != null){
@@ -23,6 +35,8 @@ function ifLogined(){
 
     
 }
+
+checkIfPassed2DaysORNot()
 ifLogined()
 
 signup.addEventListener('click', () => {
@@ -56,8 +70,11 @@ login.addEventListener('click', () => {
                 alert(data.non_field_errors);
             }else{
                 alert("로그인 성공");
-                localStorage.setItem('login_token',data.login_token)
-                location.href = "/chatting/"
+                let today = new Date();
+                localStorage.setItem('nickname',data.nickname);
+                localStorage.setItem('login_token',data.login_token);
+                localStorage.setItem('logined_time',today.getTime());
+                location.href = "/chatting/";
             }
         })
     }).catch((error) => {
@@ -67,28 +84,6 @@ login.addEventListener('click', () => {
 
 })
 
-
-// fetch('http://127.0.0.1:8080/login/', {
-//         method: 'POST',
-//         headers: header,
-//         body: JSON.stringify({
-//             "username": username.value,
-//             "password": password.value,
-//         })
-
-//     }).then(event => {
-//         event.json().then((data) => {
-//             if (data.message != undefined) {
-//                 console.log(data)
-//                 alert("로그인 성공");
-//             }
-//             else {
-//                 alert("로그인 실패");
-//             }
-//         })
-//     }).catch((error) => {
-//         alert(error)
-//     })
 
 
 

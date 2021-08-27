@@ -8,7 +8,7 @@ const msgerTitle = get('.msger-header-title');
 const BOT_IMG = "https://image.flaticon.com/icons/svg/327/327779.svg";
 const PERSON_IMG = "https://image.flaticon.com/icons/svg/145/145867.svg";
 const BOT_NAME = "EmoChatBot";
-const PERSON_NAME = "Me";
+const PERSON_NAME = localStorage.getItem('nickname');
 
 // Loading
 const msgerLoading = `
@@ -36,7 +36,7 @@ var hours = today.getHours(); // 시
 window.onload = function(){
   // msgerTitle.innerHTML = BOT_NAME;
   // appendImageButton('오늘의 기분을 표현하는 사진을 보내주세요!', '이미지 업로드');
-  saveAISentences('오늘의 기분을 표현하는 사진을 보내주세요!',localStorage.getItem('login_token'));
+  // saveAISentences('오늘의 기분을 표현하는 사진을 보내주세요!',localStorage.getItem('login_token'));
 }
 
 
@@ -96,6 +96,8 @@ function uploadImg(event) {
           else{
             msgText = `오늘 놀라운 일이 있었나요?`;
           }
+          saveAISentences('오늘의 기분을 표현하는 사진을 보내주세요!',localStorage.getItem('login_token'));
+          saveAISentences(msgText,localStorage.getItem('login_token'));
           msgerChat.removeChild(loading);
           appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
           console.log(msgText);

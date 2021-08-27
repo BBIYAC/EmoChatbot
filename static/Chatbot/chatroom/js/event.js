@@ -21,7 +21,17 @@ function ifLogined(){
     
 }
 
-
+function checkIfPassed2DaysORNot(){
+    var currentTime = new Date();
+    let passedHours = currentTime.getTime()/(1000*3600) - localStorage.getItem('logined_time')/(1000*3600);
+  
+    if(passedHours > 48){
+      localStorage.removeItem('logined_time');
+      localStorage.removeItem('login_token');
+      localStorage.removeItem('nickname');
+    }
+  
+  }
 function getConversationSentences(login_token){
     var header = new Headers();
     header.append('Content-Type', 'application/json');
@@ -36,23 +46,19 @@ function getConversationSentences(login_token){
             if(data.message !== "no data"){
                 console.log(data); //데이터가 있다면 지금까지의 대화들을 화면에 뿌려준다.
                 showPreviouschatRecords(data);
-                appendImageButton('오늘의 기분을 표현하는 사진을 보내주세요!', '이미지 업로드');
             }else{
                 console.log(data); //데이터가 없으면 아무것도 하지 않는다.
-                appendImageButton('오늘의 기분을 표현하는 사진을 보내주세요!', '이미지 업로드');
             }
+            appendImageButton('오늘의 기분을 표현하는 사진을 보내주세요!', '이미지 업로드');
         })
     }).catch((error) => {
-        alert(`room number is not exist on the list`)
+        alert(`room number is not exist on the list`);
     })
 }
 
 
 function showPreviouschatRecords(chatData){
     chatData.forEach((value,index,array)=>{
-        if (index == array.length-1){
-            return
-        }
         if(value.UserInformation_id == 5){
             if(value.text.includes("http")){
                 texts = value.text.split('<br>');
@@ -61,7 +67,7 @@ function showPreviouschatRecords(chatData){
             }
             appendMessage("EmoChatBot","https://image.flaticon.com/icons/svg/327/327779.svg", "left",value.text);
         }else{
-            appendMessage("ME", "https://image.flaticon.com/icons/svg/145/145867.svg", "right",value.text);
+            appendMessage(localStorage.getItem('nickname'), "https://image.flaticon.com/icons/svg/145/145867.svg", "right",value.text);
         }
     })
 }
@@ -97,4 +103,6 @@ function getChatRoomList(login_token){
     })
 }
 
-ifLogined()
+
+checkIfPassed2DaysORNot();
+ifLogined();
