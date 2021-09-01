@@ -1,6 +1,7 @@
 const signup = document.getElementById('btn-signup');
 const login = document.getElementById('btn-login');
-
+const findpassword = document.getElementById('btn-getreissuedpassword')
+const changepassword = document.getElementById('btn-changepassword')
 var header = new Headers();
 header.append('Content-Type', 'application/json');
 // https://emochatserver.herokuapp.com/chatroominfo/
@@ -40,8 +41,15 @@ checkIfPassed2DaysORNot()
 ifLogined()
 
 signup.addEventListener('click', () => {
-    console.log("안녕")
     location.href = "/signup/"
+})
+
+findpassword.addEventListener('click',()=>{
+    location.href = "/getreissuedpassword/"
+})
+
+changepassword.addEventListener('click',()=>{
+    location.href = "/changepassword/"
 })
 
 login.addEventListener('click', () => {
@@ -49,11 +57,6 @@ login.addEventListener('click', () => {
     const password = document.getElementById('ps');
     var header = new Headers();
     header.append('Content-Type', 'application/json');
-
-    let data ={
-        username : username.value,
-        password : password.value
-    }
 
     fetch('http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/login/', {
         method: 'POST',

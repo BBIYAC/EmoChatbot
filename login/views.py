@@ -9,3 +9,10 @@ def loginView(requests):
 
 def signupView(requests):
     return render(request=requests,template_name="signup.html")
+
+
+def getReissuedPasswordView(requests):
+    return render(request=requests,template_name="getreissuedpassword.html")
+    
+def changePasswordView(requests):
+    return render(request=requests,template_name="changepassword.html")
