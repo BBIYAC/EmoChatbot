@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% comment %} <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -79,4 +79,43 @@
 </body>
 
 </html>
-<!-- input-group mb-5 -->
+<!-- input-group mb-5 --> {% endcomment %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    {% comment %} <link rel="stylesheet" href="./login.css">
+    <link rel="stylesheet" href="./reset.css"> {% endcomment %}
+    <link href="../static/Login/login/reset.css" rel="stylesheet">
+    <link href="../static/Login/login/login.css" rel="stylesheet">
+</head>
+<body>
+    <div class="nav">    
+        <li><a href="/">EMOCHATBOT</a></li>        
+    </div>
+    <main>
+        <section class="login-section">
+            <div class="login-section-inside">
+                <div class="input-section">
+                    <h4>ID</h4>
+                    <input type="text" placeholder="ID" id="id">
+                </div>
+                <div class="input-section">
+                    <h4>PS</h4>
+                    <input type="password" placeholder="Password" id="ps">
+                </div>
+                <div class="button-section">
+                    <input type="button" id="btn-login" value="로그인">
+                    <input type="button" id="btn-signup" value="회원가입">
+                    <input type="button" id="" value="비밀번호 찾기">
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="../static/Login/login/event.js"></script>
+</body>
+</html>
