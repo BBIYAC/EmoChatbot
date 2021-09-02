@@ -99,7 +99,7 @@ function uploadImg(event) {
           saveAISentences('오늘의 기분을 표현하는 사진을 보내주세요!',localStorage.getItem('login_token'));
           saveAISentences(msgText,localStorage.getItem('login_token'));
           msgerChat.removeChild(loading);
-          appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
+          appendMessage(BOT_NAME, BOT_IMG, "left", msgText,formatDate(new Date()));
           console.log(msgText);
         } 
       });
@@ -118,7 +118,7 @@ msgerForm.addEventListener("submit", event => {
   event.preventDefault();
   const msgText = msgerInput.value;
   if (!msgText) return;
-  appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText);
+  appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText,formatDate(new Date()));
   msgerChat.insertAdjacentHTML("beforeend", msgerLoading);
   msgerInput.value = "";
   botResponse(msgText);
@@ -126,7 +126,7 @@ msgerForm.addEventListener("submit", event => {
 
 
 // Chat 추가 함수
-function appendMessage(name, img, side, text) {
+function appendMessage(name, img, side, text, time) {
   //   Simple solution for small apps
   const msgHTML = `
     <div class="msg ${side}-msg">
@@ -139,7 +139,7 @@ function appendMessage(name, img, side, text) {
 
         <div class="msg-text">${text}</div>
       </div>
-      <div class="msg-info-time">${formatDate(new Date())}</div>
+      <div class="msg-info-time">${time}</div>
     </div>
     `;
 
@@ -151,7 +151,7 @@ function appendMessage(name, img, side, text) {
 // 이미지 업로드 시 이미지 업로드 버튼 생성 함수
 function appendImageButton(text, button) {
   //   Simple solution for small apps
-  appendMessage(BOT_NAME, BOT_IMG, "left", text);
+  appendMessage(BOT_NAME, BOT_IMG, "left", text,formatDate(new Date()));
   const msgHTML = `
     <div class="msg left-msg">
       <button class="msg-image-button">
@@ -243,7 +243,7 @@ function botResponse(rawText) {
       saveAISentences(msgText,localStorage.getItem('login_token'));
     }
     else{
-      appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
+      appendMessage(BOT_NAME, BOT_IMG, "left", msgText,formatDate(new Date()));
       saveAISentences(msgText,localStorage.getItem('login_token'));
     }
     });
@@ -391,11 +391,15 @@ function get(selector, root = document) {
   return root.querySelector(selector);
 }
 
+
 function formatDate(date) {
+  const Y = date.getFullYear();
+  const M = "0" + date.getMonth();
+  const D = "0" + date.getDate();
   const h = "0" + date.getHours();
   const m = "0" + date.getMinutes();
 
-  return `${h.slice(-2)}:${m.slice(-2)}`;
+  return `${Y}/${M.slice(-2)}/${D}/${h.slice(-2)}:${m.slice(-2)}`;
 }
 
 

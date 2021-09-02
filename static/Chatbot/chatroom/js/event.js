@@ -65,11 +65,21 @@ function showPreviouschatRecords(chatData){
                 appendLinkButton(texts);
                 return
             }
-            appendMessage("EmoChatBot","https://image.flaticon.com/icons/svg/327/327779.svg", "left",value.text);
+            appendMessage("EmoChatBot","https://image.flaticon.com/icons/svg/327/327779.svg", "left",value.text,showRecordedTime(value.created_date));
         }else{
-            appendMessage(localStorage.getItem('nickname'), "https://image.flaticon.com/icons/svg/145/145867.svg", "right",value.text);
+            appendMessage(localStorage.getItem('nickname'), "https://image.flaticon.com/icons/svg/145/145867.svg", "right",value.text,showRecordedTime(value.created_date));
         }
     })
+
+}
+//2021-08-25T14:38:11.280429+09:00
+function showRecordedTime(created_date){
+    const Y = created_date.slice(0,4);
+    const M = created_date.slice(5,7);
+    const D = created_date.slice(8,10);
+    const h = created_date.slice(11,13)
+    const m = created_date.slice(14,16)
+    return `${Y}/${M}/${D}/${h}:${m}`;
 }
 
 
