@@ -56,8 +56,9 @@ function uploadImg(event) {
     var myHeader = new Headers();
     myHeader.append('Content-Type', 'application/json');
     imgURL = event.target.result.toString();
+    console.log(`${window.location.href.split('/')[4]}`);
 
-    fetch('analysis',{
+    fetch(`http://127.0.0.1:8000/chatting/analysis/`,{ //배포시 배포 주소로 바꾸기
       method: 'POST',
       headers: myHeader,
       body: imgURL,
