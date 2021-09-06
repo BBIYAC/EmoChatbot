@@ -124,8 +124,3 @@ def emotion_analysis(request):
         # remove img file
         os.remove("emotion.jpg")
         return JsonResponse(response_obj)
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 951b202e42f0f2ffb6189b84b43bc3beda2007ac
