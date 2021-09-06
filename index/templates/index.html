@@ -10,9 +10,9 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <link rel="shortcut icon" href="{% static 'img/chatbot.ico' %}" type="image/x-icon">
-  <link rel="apple-touch-icon" href="{% static 'img/chatbot.ico' %}">
+  <link rel="stylesheet" href="{% static 'Chatbot/chatroom/css/style.css' %}">
+  <link rel="shortcut icon" href="{% static 'Chatbot/chatroom/img/chatbot.ico' %}" type="image/x-icon">
+  <link rel="apple-touch-icon" href="{% static 'Chatbot/img/chatbot.ico' %}">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   <script language="javascript">
@@ -27,7 +27,7 @@
 <body onload="time()">
   <section class="msger">
     <header class="msger-header">
-      <i class="fas fa-chevron-left msger-header-prev"></i>
+      <i class="fas fa-chevron-left msger-header-prev" onclick="setting_prev()"></i>
       <div class="msger-header-title">
         
       </div>
@@ -90,7 +90,8 @@
   </section>
   <!-- partial -->
   <script src='https://use.fontawesome.com/releases/v5.0.13/js/all.js'></script>
-  <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+  <script type="text/javascript" src="{% static 'Chatbot/chatroom/js/event.js' %}"></script>
+  <script type="text/javascript" src="{% static 'Chatbot/chatroom/js/main.js' %}"></script>
 
 </body>
 

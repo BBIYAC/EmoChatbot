@@ -24,14 +24,14 @@ import matplotlib.pyplot as plt
 import os
 
 
-@csrf_exempt
-def auth(request):
-    return render(request, 'auth.html')
-    
+
+def chatListView(requests):
+    return render(requests, 'chatlist.html')
 
 
+
 @csrf_exempt
-def index(request):
+def index(request,id):
     if(request.method == "POST"):
         msgText = ast.literal_eval(request.body.decode('UTF-8'))
         response_obj = {}
@@ -125,3 +125,7 @@ def emotion_analysis(request):
         os.remove("emotion.jpg")
         return JsonResponse(response_obj)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 951b202e42f0f2ffb6189b84b43bc3beda2007ac

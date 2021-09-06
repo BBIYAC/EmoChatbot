@@ -3,11 +3,12 @@ const msgerInput = get(".msger-input");
 const msgerChat = get(".msger-chat");
 const msgerTitle = get('.msger-header-title');
 
+
 // Icons made by Freepik from www.flaticon.com
 const BOT_IMG = "https://image.flaticon.com/icons/svg/327/327779.svg";
 const PERSON_IMG = "https://image.flaticon.com/icons/svg/145/145867.svg";
 const BOT_NAME = "EmoChatBot";
-const PERSON_NAME = "Me";
+const PERSON_NAME = localStorage.getItem('nickname');
 
 // Loading
 const msgerLoading = `
@@ -33,8 +34,9 @@ var hours = today.getHours(); // 시
 
 // 채팅방 입장 시 챗봇 및 이미지 업로드 버튼 출력 => 하루 주기로 변경
 window.onload = function(){
-  msgerTitle.innerHTML = BOT_NAME;
-  appendImageButton('오늘의 기분을 표현하는 사진을 보내주세요!', '이미지 업로드');
+  // msgerTitle.innerHTML = BOT_NAME;
+  // appendImageButton('오늘의 기분을 표현하는 사진을 보내주세요!', '이미지 업로드');
+  // saveAISentences('오늘의 기분을 표현하는 사진을 보내주세요!',localStorage.getItem('login_token'));
 }
 
 
@@ -54,8 +56,9 @@ function uploadImg(event) {
     var myHeader = new Headers();
     myHeader.append('Content-Type', 'application/json');
     imgURL = event.target.result.toString();
+    console.log(`${window.location.href.split('/')[4]}`);
 
-    fetch('analysis',{
+    fetch(`http://127.0.0.1:8000/chatting/analysis/`,{ //배포시 배포 주소로 바꾸기
       method: 'POST',
       headers: myHeader,
       body: imgURL,
@@ -94,8 +97,10 @@ function uploadImg(event) {
           else{
             msgText = `오늘 놀라운 일이 있었나요?`;
           }
+          saveAISentences('오늘의 기분을 표현하는 사진을 보내주세요!',localStorage.getItem('login_token'));
+          saveAISentences(msgText,localStorage.getItem('login_token'));
           msgerChat.removeChild(loading);
-          appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
+          appendMessage(BOT_NAME, BOT_IMG, "left", msgText,formatDate(new Date()));
           console.log(msgText);
         } 
       });
@@ -114,7 +119,7 @@ msgerForm.addEventListener("submit", event => {
   event.preventDefault();
   const msgText = msgerInput.value;
   if (!msgText) return;
-  appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText);
+  appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText,formatDate(new Date()));
   msgerChat.insertAdjacentHTML("beforeend", msgerLoading);
   msgerInput.value = "";
   botResponse(msgText);
@@ -122,7 +127,7 @@ msgerForm.addEventListener("submit", event => {
 
 
 // Chat 추가 함수
-function appendMessage(name, img, side, text) {
+function appendMessage(name, img, side, text, time) {
   //   Simple solution for small apps
   const msgHTML = `
     <div class="msg ${side}-msg">
@@ -135,7 +140,7 @@ function appendMessage(name, img, side, text) {
 
         <div class="msg-text">${text}</div>
       </div>
-      <div class="msg-info-time">${formatDate(new Date())}</div>
+      <div class="msg-info-time">${time}</div>
     </div>
     `;
 
@@ -147,7 +152,7 @@ function appendMessage(name, img, side, text) {
 // 이미지 업로드 시 이미지 업로드 버튼 생성 함수
 function appendImageButton(text, button) {
   //   Simple solution for small apps
-  appendMessage(BOT_NAME, BOT_IMG, "left", text);
+  appendMessage(BOT_NAME, BOT_IMG, "left", text,formatDate(new Date()));
   const msgHTML = `
     <div class="msg left-msg">
       <button class="msg-image-button">
@@ -214,7 +219,7 @@ function appendLinkButton(texts) {
 
 // 사용자 입력에 따른 챗봇 응답 
 function botResponse(rawText) {
-  console.log(rawText);
+  saveUserSentences(rawText,localStorage.getItem('login_token'))
 
   var myHeader = new Headers();
   myHeader.append('Content-Type', 'application/json');
@@ -235,10 +240,12 @@ function botResponse(rawText) {
 
     if(msgText.includes("http")){
       texts = msgText.split('<br>');
-      appendLinkButton(texts)
+      appendLinkButton(texts);
+      saveAISentences(msgText,localStorage.getItem('login_token'));
     }
     else{
-      appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
+      appendMessage(BOT_NAME, BOT_IMG, "left", msgText,formatDate(new Date()));
+      saveAISentences(msgText,localStorage.getItem('login_token'));
     }
     });
   })
@@ -247,6 +254,54 @@ function botResponse(rawText) {
   })
 
 }
+
+//api_save
+function saveUserSentences(text,login_token){
+  var myHeader = new Headers();
+  myHeader.append('Content-Type', 'application/json');
+  fetch(`http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/${window.location.href.split('/')[4]}/conversation-sentences/`,{
+    method: 'POST',
+    headers: myHeader,
+    credentials: 'include',
+    body:JSON.stringify({
+        "text": text,
+        "is_read": true               
+      })
+  })
+  .then((event)=>{
+    event.json().then((data)=>{
+      console.log(data);
+    })
+  }).catch((error)=>{
+
+  });
+}
+
+function saveAISentences(text,login_token){
+  var myHeader = new Headers();
+  myHeader.append('Content-Type', 'application/json');
+  fetch(`http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/${window.location.href.split('/')[4]}/conversation-sentences/ai/`,{
+    method: 'POST',
+    headers: myHeader,
+    credentials: 'include',
+    body:JSON.stringify({
+        "text": text,
+        "is_read": true               
+      })
+  })
+  .then((event)=>{
+    event.json().then((data)=>{
+      console.log(data);
+    })
+  }).catch((error)=>{
+
+  });
+}
+
+// {
+//   "text": "안녕하세요",
+//   "is_read": true
+// }
 
 
 
@@ -337,13 +392,20 @@ function get(selector, root = document) {
   return root.querySelector(selector);
 }
 
+
 function formatDate(date) {
+  const Y = date.getFullYear();
+  const M = "0" + date.getMonth();
+  const D = "0" + date.getDate();
   const h = "0" + date.getHours();
   const m = "0" + date.getMinutes();
 
-  return `${h.slice(-2)}:${m.slice(-2)}`;
+  return `${Y}/${M.slice(-2)}/${D}/${h.slice(-2)}:${m.slice(-2)}`;
 }
 
 
-
+//이전페이지 이동
+function setting_prev(){
+  location.href = '/chatting/';
+}
 
