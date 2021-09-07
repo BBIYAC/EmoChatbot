@@ -100,7 +100,7 @@ function analysis_monthly_emotion(monthly_datas){
         }]
     };
 
-    // 한 달 데이터 추가
+    // 한 달 데이터 추가 -> 30, 31일에 따라 반복문(monthly_datas.length)
     for(let i=1; i<=31; i++){
         monthly_data['labels'].push(i);
         // 한 달 데이터는 DB에서 가져오기
