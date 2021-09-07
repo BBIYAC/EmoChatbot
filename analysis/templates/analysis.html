@@ -53,12 +53,8 @@
             <h3 class='analysis-sentence-title'>일주일의 기록</h3>
             <p class='analysis-sentence-text'></p>
         </div>
-        <div class='analysis-positive-bg'>
-            <div class='analysis-positive'></div>
-        </div>
-        <div class='analysis-posneg'>
-            <p class='analysis-nag'>😡</p>
-            <p class='analysis-pos'>😊</p>
+        <div class='analysis-chart'>
+            <canvas id='weekly'></canvas>
         </div>
     </div>
 
@@ -67,17 +63,14 @@
             <h3 class='analysis-sentence-title'>한 달의 기록</h3>
             <p class='analysis-sentence-text'></p>
         </div>
-        <div class='analysis-positive-bg'>
-            <div class='analysis-positive'></div>
-        </div>
-        <div class='analysis-posneg'>
-            <p class='analysis-nag'>😡</p>
-            <p class='analysis-pos'>😊</p>
+        <div class='analysis-chart'>
+            <canvas id='monthly'></canvas>
         </div>
     </div>
 
 
   </section>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js'></script>
   <script src='https://use.fontawesome.com/releases/v5.0.13/js/all.js'></script>
   <script type="text/javascript" src="{% static 'Analysis/analysis.js' %}"></script>
 
