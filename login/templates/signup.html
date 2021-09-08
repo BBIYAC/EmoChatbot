@@ -5,31 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link href="../static/Login/signup/signup.css" rel="stylesheet">
     <link href="../static/Login/signup/reset.css" rel="stylesheet">
+    <link href="../static/Login/signup/signup.css" rel="stylesheet">
 </head>
 <body>
-    <div class="nav">    
-        <a href="/">EMOCHATBOT</a>      
-    </div>
     <main>
+        <div class='logo'>
+            <a href="/">EmoChatbot</a>
+            {% comment %} <div class='login-title'>Login</div> {% endcomment %}
+        </div>
         <section class="login-section">
             <div class="login-section-inside">
                 <div class="input-section">
-                    <h4>ID</h4>
+                    <h4>아이디</h4>
                     <input type="text" placeholder="ID" id="id">
                 </div>
                 <div class="input-section">
-                    <h4>PS</h4>
+                    <h4>비밀번호</h4>
                     <input type="password" placeholder="Password" id="ps">
                 </div>
                 <div class="input-section">
-                    <h4 class="email">Email</h4>
-                    <input type="email" placeholder="이메일" id="email">
+                    <h4 class="email">이메일</h4>
+                    <input type="email" placeholder="Email" id="email">
                 </div>
                 <div class="input-section">
-                    <h4 class="nickname">Nickname</h4>
-                    <input type="text" placeholder="닉네임" id="nickname">
+                    <h4 class="nickname">닉네임</h4>
+                    <input type="text" placeholder="Nickname" id="nickname">
                 </div>
                 <div class="button-section">
                     <input type="button" id="btn-create-account" value="계정생성">
