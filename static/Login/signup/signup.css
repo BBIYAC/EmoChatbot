@@ -11,7 +11,7 @@ a:hover { color: none; text-decoration: none;}
 .logo a{
     font-weight: bold;
     font-size: 30px;
-    color: #4492FA;
+    color: #3ea2ff;
 }
 .login-title{
     line-height: 40px;
@@ -61,7 +61,7 @@ a:hover { color: none; text-decoration: none;}
     margin-top: 1em;
     font-size: 0.95rem;
     font-weight: 900;
-    background-color: #4492FA;
+    background-color: #3ea2ff;
     border:none;
     border-radius: 5px;
     color: white;

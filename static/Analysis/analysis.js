@@ -8,7 +8,7 @@ const analysis_positive = get('.analysis-positive');
 
 window.onload = () => {
     analysis_facial_emotion('sad');
-    analysis_sentence_emotion(90);
+    analysis_sentence_emotion(30);
 
     // 한 주 데이터 DB에서 가져오기 -> line 106 같이 수정
     var weekly_datas = [65, 59, 80, 81, 56, 55, 40];
@@ -95,8 +95,8 @@ function analysis_monthly_emotion(monthly_datas){
         datasets: [{
             label: 'Monthly Records',
             data: monthly_datas,
-            backgroundColor: 'rgb(68, 146, 250)',
-            borderColor: 'rgb(68, 146, 250)',
+            backgroundColor: 'rgb(62, 162, 255)',
+            borderColor: 'rgb(62, 162, 255)',
         }]
     };
 
