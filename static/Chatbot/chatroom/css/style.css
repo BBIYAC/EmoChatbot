@@ -26,6 +26,13 @@
     text-decoration: none;
   }
 
+  /* 스크롤바 스타일 없애기 */
+  body{ 
+    -ms-overflow-style: none; 
+  } 
+  ::-webkit-scrollbar { 
+      display: none; 
+  }
   
   body {
     display: flex;
@@ -52,6 +59,7 @@
     box-shadow: 0 15px 15px -5px rgba(0, 0, 0, 0.2);
     position: fixed;
     overflow: hidden;
+    font-family: 'NEXON Lv1 Gothic OTF';
   }
 
   @keyframes fadeIn{
@@ -469,4 +477,11 @@
   .setting-time{
     margin-bottom: 70px;
   }
+}
+
+@font-face {
+  font-family: 'NEXON Lv1 Gothic OTF';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }

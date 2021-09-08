@@ -8,6 +8,7 @@ a:hover { color: none; text-decoration: none;}
 
 .logo{
     margin: 7rem auto 2rem 6.5rem;
+    font-family: 'NEXON Lv1 Gothic OTF';
 }
 
 .logo a{
@@ -25,6 +26,7 @@ a:hover { color: none; text-decoration: none;}
     border-radius: 20px;
     border: 2px solid #ddd;
     margin: auto;
+    font-family: 'NEXON Lv1 Gothic OTF';
 }
 
 .login-section-inside{
@@ -63,6 +65,7 @@ a:hover { color: none; text-decoration: none;}
     border:none;
     border-radius: 5px;
     color: white;
+    font-family: 'NEXON Lv1 Gothic OTF';
 }
 
 #btn-getreissuedpassword,
@@ -70,7 +73,8 @@ a:hover { color: none; text-decoration: none;}
     background-color: #fff;
     cursor: pointer;
     border:none;
-    margin-top: 20px;]
+    margin-top: 20px;
+    font-family: 'NEXON Lv1 Gothic OTF';
 }
 
 #btn-getreissuedpassword{
@@ -91,4 +95,9 @@ a:hover { color: none; text-decoration: none;}
     }
 }
 
-
+@font-face {
+    font-family: 'NEXON Lv1 Gothic OTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
