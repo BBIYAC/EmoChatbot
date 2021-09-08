@@ -11,26 +11,29 @@
     <link href="../static/Login/login/login.css" rel="stylesheet">
 </head>
 <body>
-    <div class="nav">    
+    {% comment %} <div class="nav">    
         <li><a href="/">EmoChatbot</a></li>        
-    </div>
+    </div> {% endcomment %}
     <main>
-        <div class='login-title'>Login</div>
+        <div class='logo'>
+            <a href="/">EmoChatbot</a>
+            {% comment %} <div class='login-title'>Login</div> {% endcomment %}
+        </div>
         <section class="login-section">
             <div class="login-section-inside">
                 <div class="input-section">
-                    {% comment %} <h4>ID</h4> {% endcomment %}
+                    <h4>아이디</h4>
                     <input type="text" placeholder="ID" id="id">
                 </div>
                 <div class="input-section">
-                    {% comment %} <h4>PW</h4> {% endcomment %}
+                    <h4>비밀번호</h4>
                     <input type="password" placeholder="Password" id="ps">
                 </div>
                 <div class="button-section">
                     <input type="button" id="btn-login" value="로그인">
                     <input type="button" id="btn-signup" value="회원가입">
                     <input type="button" id="btn-getreissuedpassword" value="비밀번호 재발급">
-                    <input type="button" id="btn-changepassword" value="비밀번호 변경">
+                    /<input type="button" id="btn-changepassword" value="비밀번호 변경">
                 </div>
             </div>
         </section>
