@@ -43,6 +43,7 @@ window.onload = function(){
 
 //  이미지 업로드 시 채팅에 이미지 출력
 function uploadImg(event) { 
+  const file = event.target.files[0]
   var reader = new FileReader(); 
   reader.onload = function(event) { 
     appendImage(event.target.result); // event.target.result : 바이트 형태
@@ -55,8 +56,9 @@ function uploadImg(event) {
 
     var myHeader = new Headers();
     myHeader.append('Content-Type', 'application/json');
-    imgURL = event.target.result.toString();
-    console.log(`${window.location.href.split('/')[4]}`);
+    const imgURL = event.target.result.toString();
+    console.log(imgURL);
+    console.log(file)
 
     fetch(`http://127.0.0.1:8000/chatting/analysis/`,{ //배포시 배포 주소로 바꾸기
       method: 'POST',
@@ -72,6 +74,7 @@ function uploadImg(event) {
         if(String(emotion) == "null"){ // 감정 분석 실패한 경우
           msgerChat.removeChild(loading);
           appendImageButton('얼굴이 제대로 나오도록 다시 보내주세요!', '이미지 업로드');
+          saveAISentences('얼굴이 제대로 나오도록 다시 보내주세요!',localStorage.getItem('login_token'));
           console.log('이미지 재업로드');
         }
         else{
@@ -97,8 +100,25 @@ function uploadImg(event) {
           else{
             msgText = `오늘 놀라운 일이 있었나요?`;
           }
-          saveAISentences('오늘의 기분을 표현하는 사진을 보내주세요!',localStorage.getItem('login_token'));
-          saveAISentences(msgText,localStorage.getItem('login_token'));
+          // let promise = new Promise((resolve,reject)=>{
+          //   resolve(saveAISentences('오늘의 기분을 표현하는 사진을 보내주세요!',localStorage.getItem('login_token')));
+          // }).then(()=>{
+          //   saveUserSentences("이미지",localStorage.getItem('login_token'),file).then();
+          // }).then(()=>{
+          //   saveAISentences(msgText,localStorage.getItem('login_token'));
+          // })
+          saveAISentences('오늘의 기분을 표현하는 사진을 보내주세요!',localStorage.getItem('login_token')).then(()=>{
+            saveUserSentences("이미지",localStorage.getItem('login_token'),file).then(()=>{
+              saveAISentences(msgText,localStorage.getItem('login_token'));
+            });
+          });
+          // saveUserSentences("이미지",localStorage.getItem('login_token'),file);
+          // saveAISentences(msgText,localStorage.getItem('login_token'));
+
+          // saveUserSentences("이미지",localStorage.getItem('login_token'),file)
+          // saveAISentences(msgText,localStorage.getItem('login_token'));
+          
+          // event.target.files[0]
           msgerChat.removeChild(loading);
           appendMessage(BOT_NAME, BOT_IMG, "left", msgText,formatDate(new Date()));
           console.log(msgText);
@@ -255,11 +275,32 @@ function botResponse(rawText) {
 
 }
 
+async function saveUserImage(stcId,image){
+  var formData = new FormData()
+  formData.append("chatting_sentence_id",stcId);
+  formData.append("image",image)
+  console.log("stc : ",stcId);
+  // http://127.0.0.1:2000/chatroominfo/${localStorage.getItem('login_token')}/${window.location.href.split('/')[4]}/conversation-sentences/image/
+  // http://127.0.0.1:2000/chatroominfo/1589685ec15b73a08c17262a1fc43246727cfff0/1/conversation-sentences/image/
+  return await fetch(`http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${localStorage.getItem('login_token')}/${window.location.href.split('/')[4]}/conversation-sentences/image/`,{
+    method: 'POST',
+    credentials: 'include',
+    body:formData
+  })
+  .then((event)=>{
+    event.json().then((data)=>{
+      console.log(data);
+    })
+  }).catch((error)=>{
+
+  });
+}
+
 //api_save
-function saveUserSentences(text,login_token){
+async function saveUserSentences(text,login_token,image=null){
   var myHeader = new Headers();
   myHeader.append('Content-Type', 'application/json');
-  fetch(`http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/${window.location.href.split('/')[4]}/conversation-sentences/`,{
+  return await fetch(`http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/${window.location.href.split('/')[4]}/conversation-sentences/`,{
     method: 'POST',
     headers: myHeader,
     credentials: 'include',
@@ -271,16 +312,19 @@ function saveUserSentences(text,login_token){
   .then((event)=>{
     event.json().then((data)=>{
       console.log(data);
+      if(image != null){
+        saveUserImage(data.id,image)
+      }
     })
   }).catch((error)=>{
 
   });
 }
 
-function saveAISentences(text,login_token){
+async function saveAISentences(text,login_token){
   var myHeader = new Headers();
   myHeader.append('Content-Type', 'application/json');
-  fetch(`http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/${window.location.href.split('/')[4]}/conversation-sentences/ai/`,{
+  return await fetch(`http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/${window.location.href.split('/')[4]}/conversation-sentences/ai/`,{
     method: 'POST',
     headers: myHeader,
     credentials: 'include',

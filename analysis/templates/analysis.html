@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>EmoChatbot</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="stylesheet" href="{% static 'Analysis/analysis.css' %}">
+  <link rel="shortcut icon" href="{% static 'Chatbot/chatroom/img/chatbot.ico' %}" type="image/x-icon">
+  <link rel="apple-touch-icon" href="{% static 'Chatbot/img/chatbot.ico' %}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
+</head>
+
+<body >
+  <section class="analysis-container">
+    <header class="analysis-header">
+      <i class="fas fa-chevron-left analysis-header-prev" onclick="setting_prev()"></i>
+      <div class="analysis-header-title">Analysis</div>
+      <i class="fas fa-ellipsis-h analysis-header-setting" onclick="setting_open()"></i>
+    </header>
+
+    <div class="analysis-image">
+        <div class="analysis-image-emotion">
+            <img class='analysis-image-emotion-icon'></img>
+            <p class='analysis-image-emotion-text'></p>
+        </div>
+        <p class="analysis-image-text"></p>
+    </div>
+
+    <div class='analysis-sentence'>
+        <div class='analysis-positive-text'>
+            <h3 class='analysis-sentence-title'>어제의 긍정지수</h3>
+            <p class='analysis-sentence-text'></p>
+        </div>
+        <div class='analysis-positive-bg'>
+            <div class='analysis-positive'></div>
+        </div>
+        <div class='analysis-posneg'>
+            <p class='analysis-nag'>😡</p>
+            <p class='analysis-pos'>😊</p>
+        </div>
+    </div>
+
+    <div class='analysis-sentence'>
+        <div class='analysis-positive-text'>
+            <h3 class='analysis-sentence-title'>일주일의 기록</h3>
+            <p class='analysis-sentence-text'></p>
+        </div>
+        <div class='analysis-chart'>
+            <canvas id='weekly'></canvas>
+        </div>
+    </div>
+
+    <div class='analysis-sentence'>
+        <div class='analysis-positive-text'>
+            <h3 class='analysis-sentence-title'>한 달의 기록</h3>
+            <p class='analysis-sentence-text'></p>
+        </div>
+        <div class='analysis-chart'>
+            <canvas id='monthly'></canvas>
+        </div>
+    </div>
+
+
+  </section>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js'></script>
+  <script src='https://use.fontawesome.com/releases/v5.0.13/js/all.js'></script>
+  <script type="text/javascript" src="{% static 'Analysis/analysis.js' %}"></script>
+
+</body>
+
+</html>
