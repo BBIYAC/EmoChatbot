@@ -100,25 +100,15 @@ function uploadImg(event) {
           else{
             msgText = `오늘 놀라운 일이 있었나요?`;
           }
-          // let promise = new Promise((resolve,reject)=>{
-          //   resolve(saveAISentences('오늘의 기분을 표현하는 사진을 보내주세요!',localStorage.getItem('login_token')));
-          // }).then(()=>{
-          //   saveUserSentences("이미지",localStorage.getItem('login_token'),file).then();
-          // }).then(()=>{
-          //   saveAISentences(msgText,localStorage.getItem('login_token'));
-          // })
+
+
+          //이미지 저장
           saveAISentences('오늘의 기분을 표현하는 사진을 보내주세요!',localStorage.getItem('login_token')).then(()=>{
-            saveUserSentences("이미지",localStorage.getItem('login_token'),file).then(()=>{
+            saveUserSentences("eval(function(p,a,c,k,e,r){e=String;if(!''.replace(/^/,String)){while(c--)r[c]=k[c]||c;k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('이미지',2,0,''.split('|'),0,{}))",localStorage.getItem('login_token'),file).then(()=>{
               saveAISentences(msgText,localStorage.getItem('login_token'));
             });
           });
-          // saveUserSentences("이미지",localStorage.getItem('login_token'),file);
-          // saveAISentences(msgText,localStorage.getItem('login_token'));
 
-          // saveUserSentences("이미지",localStorage.getItem('login_token'),file)
-          // saveAISentences(msgText,localStorage.getItem('login_token'));
-          
-          // event.target.files[0]
           msgerChat.removeChild(loading);
           appendMessage(BOT_NAME, BOT_IMG, "left", msgText,formatDate(new Date()));
           console.log(msgText);
@@ -200,18 +190,21 @@ function appendImageButton(text, button) {
 
 
 // 업로드한 이미지 출력 함수
-function appendImage(uploadImg) {
+function appendImage(uploadImg,name=null) {
   //   Simple solution for small apps
   const msgHTML = `
     <div class="msg right-msg">
       <div class="msg-img" style="background-image: url(${PERSON_IMG})"></div>
-      <img class="msg-upload-image" src="${uploadImg}">
+      <img id="${name}" class=" msg-upload-image" src="${uploadImg}">
       <div class="msg-info-time">${formatDate(new Date())}</div>
     </div>
     `;
-
-  msgerChat.insertAdjacentHTML("beforeend", msgHTML);
-  msgerChat.insertAdjacentHTML("beforeend", msgerLoading);
+  if(uploadImg === '/'){
+    msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+  }else{
+    msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+    msgerChat.insertAdjacentHTML("beforeend", msgerLoading);
+  }
   msgerChat.scrollTop += 500;
 
   
