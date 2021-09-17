@@ -49,22 +49,26 @@ function ifLogined() {
     getChatRoomList(login_token);
   }).catch((error) => { location.href = '/' })
 }
-
-
+// http://127.0.0.1:8000/chatroominfo/1589685ec15b73a08c17262a1fc43246727cfff0/
+// http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/
 function getChatRoomList(login_token) {
-  fetch(`http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/`, {
+  fetch(`http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/`, { //임시사용 사용 후 다시 위에있는 주소로 교체
     method: 'GET',
     headers: header,
     credentials: 'include',
 
   }).then(event => {
     event.json().then((datas) => {
+      var is_real_time_list = Array();
       for (var data of datas) {
+        console.log(data)
         var chatList = document.querySelector('.chat_list');
         chatList.innerHTML += ListForm(data.chatting_room_name, data.id,data.last_sentence,data.created_time);
+        is_real_time_list.push(data.is_real_time)
       }
       const rooms = document.querySelectorAll('.room');
-      clickRoomButton(rooms);
+      console.log(is_real_time_list)
+      clickRoomButton(rooms,is_real_time_list);
 
     })
   }).catch((error) => {
@@ -72,10 +76,16 @@ function getChatRoomList(login_token) {
   })
 }
 
-function clickRoomButton(rooms) {
+
+function clickRoomButton(rooms,is_real_time_list) {
   rooms.forEach((item, index) => {
     item.addEventListener('click', (event) => {
-      location.href = `/chatting/${item.className.split(' ')[1]}`;
+      console.log(index)
+      if (is_real_time_list[Number(index)] === false){
+        location.href = `/chatting/${item.className.split(' ')[1]}`;
+      }else{
+        location.href = `/chatting/realChat/${item.className.split(' ')[1]}`;        
+      }
     })
   })
 }

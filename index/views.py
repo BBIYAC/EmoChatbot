@@ -25,6 +25,9 @@ import os
 
 
 
+def realChatRoom(requests,id):
+    return render(requests, 'index_real_chat.html')
+
 def chatListView(requests):
     return render(requests, 'chatlist.html')
 
