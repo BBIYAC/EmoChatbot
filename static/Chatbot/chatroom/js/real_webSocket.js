@@ -1,8 +1,8 @@
 const chatSocket = new WebSocket(
     'ws://'
-    + "ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000"
+    + "ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000" //"ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000"
     +'/ws/chat/'
-    + localStorage.getItem('login_token') +"A"+window.location.href.split('/')[5]
+    + localStorage.getItem('login_token') +"A"+window.location.href.split('/')[5] //test : 285bd93d27b4aa4f76495ded9f14e94fa4226f2d localStorage.getItem('login_token')
     +'/'
 );
 

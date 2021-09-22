@@ -23,6 +23,53 @@ function setting_prev() {
   location.href = '/chatting/';
 }
 
+function showRecordedTime(created_date) {
+  const Y = created_date.slice(0, 4);
+  const M = created_date.slice(5, 7);
+  const D = created_date.slice(8, 10);
+  const h = created_date.slice(11, 13)
+  const m = created_date.slice(14, 16)
+  return `${Y}/${M}/${D}/${h}:${m}`;
+}
+
+async function getConversationSentences(login_token) {
+  var header = new Headers();
+  header.append('Content-Type', 'application/json');
+  // http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/f36192fbf818b87a77ccc64641dca8564db2c568/1/conversation-sentences
+  return await fetch(`http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/${window.location.href.split('/')[5]}/conversation-sentences/`, {
+      method: 'GET',
+      headers: header,
+      credentials: 'include',
+
+  }).then(event => {
+      event.json().then((data) => {
+          if (data.message !== "no data") {
+              console.log(data); //데이터가 있다면 지금까지의 대화들을 화면에 뿌려준다.
+              showPreviouschatRecords(data);
+          }
+          else {
+              console.log(data); //데이터가 없으면 아무것도 하지 않는다.
+          }
+
+      })
+  }).catch((error) => {
+      alert(`room number is not exist on the list`);
+  })
+}
+
+function showPreviouschatRecords(chatData) {
+  chatData.forEach((value, index, array) => {
+      if (value.UserInformation_id == localStorage.getItem('user_id')) {
+        appendMessage(localStorage.getItem('nickname'), "https://image.flaticon.com/icons/svg/145/145867.svg", "right", value.text, showRecordedTime(value.created_date));
+      
+      }else{
+        appendMessage("EmoChatBot", "https://image.flaticon.com/icons/svg/327/327779.svg", "left", value.text, showRecordedTime(value.created_date));
+      }
+  })
+
+}
+
+
 
 function setting_notice_time() {
   var myHeader = new Headers();
@@ -109,7 +156,7 @@ msgerForm.addEventListener("submit", event => {
   chatSocket.send(JSON.stringify({
     'message':msgText,
     'nickname' : localStorage.getItem('nickname'),
-    'token' : localStorage.getItem('login_token'),
+    'token' :localStorage.getItem('login_token'), //test : 285bd93d27b4aa4f76495ded9f14e94fa4226f2d localStorage.getItem('login_token')
     'room_id' : window.location.href.split('/')[5]
   }));
 });
@@ -125,6 +172,7 @@ function ifLogined() {
       }
   }).then((login_token) => {
       console.log("로그인 성공");
+      getConversationSentences(login_token);
   }).catch((error) => {
       console.log(error);
       alert("로그인 하세요");

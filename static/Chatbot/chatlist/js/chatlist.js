@@ -49,7 +49,7 @@ function ifLogined() {
     getChatRoomList(login_token);
   }).catch((error) => { location.href = '/' })
 }
-// http://127.0.0.1:8000/chatroominfo/1589685ec15b73a08c17262a1fc43246727cfff0/
+// http://127.0.0.1:8000/chatroominfo/285bd93d27b4aa4f76495ded9f14e94fa4226f2d/
 // http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/
 function getChatRoomList(login_token) {
   fetch(`http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/`, { //임시사용 사용 후 다시 위에있는 주소로 교체

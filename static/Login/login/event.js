@@ -75,6 +75,7 @@ login.addEventListener('click', () => {
                 alert("로그인 성공");
                 let today = new Date();
                 localStorage.setItem('nickname',data.nickname);
+                localStorage.setItem('user_id',data.user_id);
                 localStorage.setItem('login_token',data.login_token);
                 localStorage.setItem('logined_time',today.getTime());
                 location.href = "/chatting/";
