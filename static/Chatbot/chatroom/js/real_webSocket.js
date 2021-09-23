@@ -11,8 +11,9 @@ chatSocket.onmessage = function(e){
     console.log(data);
     if(data.nickname === localStorage.getItem('nickname')){
         appendMessage(PERSON_NAME, PERSON_IMG, "right",data.message, formatDate(new Date()));
+        saveUserSentences(data.message,localStorage.getItem('login_token'))
     }else{
-        appendMessage(PERSON_NAME, PERSON_IMG, "left",data.message, formatDate(new Date()));
+        appendMessage(data.nickname, PERSON_IMG, "left",data.message, formatDate(new Date()));
     }
 };
 
@@ -22,3 +23,28 @@ chatSocket.onclose = function(e){
 
 
 
+async function saveUserSentences(text,login_token,image=null){
+    var myHeader = new Headers();
+    myHeader.append('Content-Type', 'application/json');
+    return await fetch(`http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/${window.location.href.split('/')[5]}/conversation-sentences/`,{
+      method: 'POST',
+      headers: myHeader,
+      credentials: 'include',
+      body:JSON.stringify({
+          "text": text,
+          "is_read": true               
+        })
+    })
+    .then((event)=>{
+      event.json().then((data)=>{
+        console.log(data);
+        if(image != null){
+          saveUserImage(data.id,image)
+        }
+      })
+    }).catch((error)=>{
+  
+    });
+  }
+
+//   saveUserSentences(rawText,localStorage.getItem('login_token'))
