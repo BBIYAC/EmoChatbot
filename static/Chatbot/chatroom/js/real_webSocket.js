@@ -45,6 +45,4 @@ async function saveUserSentences(text,login_token,image=null){
     }).catch((error)=>{
   
     });
-  }
-
-//   saveUserSentences(rawText,localStorage.getItem('login_token'))
+}
