@@ -61,7 +61,7 @@ async function getConversationSentences(login_token) {
 
 function showPreviouschatRecords(chatData) {
     chatData.forEach((value, index, array) => {
-        if (value.UserInformation_id == 3) {
+        if (value.UserInformation_id == 4) {
             if (value.text.includes("http")) {
                 texts = value.text.split('<br>');
                 appendLinkButton(texts);
@@ -106,7 +106,7 @@ function showRecordedTime(created_date) {
     const D = created_date.slice(8, 10);
     const h = created_date.slice(11, 13)
     const m = created_date.slice(14, 16)
-    return `${Y}/${M}/${D}/${h}:${m}`;
+    return `${M}/${D}/${h}:${m}`;
 }
 
 

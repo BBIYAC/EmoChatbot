@@ -29,7 +29,7 @@ function showRecordedTime(created_date) {
   const D = created_date.slice(8, 10);
   const h = created_date.slice(11, 13)
   const m = created_date.slice(14, 16)
-  return `${Y}/${M}/${D}/${h}:${m}`;
+  return `${M}/${D}/${h}:${m}`;
 }
 
 async function getConversationSentences(login_token) {
@@ -145,7 +145,7 @@ function formatDate(date) {
   const h = "0" + date.getHours();
   const m = "0" + date.getMinutes();
 
-  return `${Y}/${M.slice(-2)}/${D}/${h.slice(-2)}:${m.slice(-2)}`;
+  return `${M.slice(-2)}/${D}/${h.slice(-2)}:${m.slice(-2)}`;
 }
 
 msgerForm.addEventListener("submit", event => {

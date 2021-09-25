@@ -1,169 +1,64 @@
-<!-- gnb : global navigation bar-->
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chatlist</title>
-    <!--<link rel="stylesheet" href="css/style.css" />-->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
-    />
-    <link rel="stylesheet" href="{% static 'Chatbot/chatlist/css/style.css' %}" /> 
-  </head>
-  <body class="vsc-initialized using-mouse" cz-shortcut-listen="true">
-    <div id="__next">
-      <!-- 바깥 래핑-->
-      <div id="wrap">
-        <!-- 한겹 더 래핑-->
-        <header id="header">
-          <!-- 윗부분 막대 전체 컨테이너-->
-          <div class="inner">
-            <!-- 한겹 내의 컨트롤 패널-->
-            <h1 class="main_logo">
-              <!--좌상단 링크블럭 -->
-              <a href="/" class="logo N=a:gnb.naver">
-                <img src="{% static 'Chatbot/chatlist/images/logo.png' %}" width="54" alt="바로가기1" />
-              </a>
-              <a href="/" class="title N=a:gnb.home">
-                <!-- home 가기 href="/"로 최상단 루트로 이동-->
-                <img src="{% static 'Chatbot/chatlist/images/right_logo.png' %}" width="40" alt="바로가기2" />
-              </a>
-            </h1>
-            <div class="user_menu">
-              <!-- 윗부분 바로가기 두개 제외한 나머지 부분 패널-->
-              <div class="gnb_area">
-                <!-- 우상단 링크블럭-->
-                <div id="div" class="gnb_one"></div>
-                <ul class="gnb_lst" id="gnb_lst" style="display: block">
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </header>
 
-        <main id="container" role="main">
-          <aside id="snb" class="snb"></aside>
-          <!-- 왼쪽 사이드 여백처리-->
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'Chatbot/chatlist/css/style.css' %}" />
+  <title>Chatlist</title>
+</head>
 
-          <aside id="aside" class="aside">
-            <!-- 오른쪽 사이드영역 : 부가메뉴등이 들어감-->
-            <h2 class="blind">오른쪽영역</h2>
-            <section class="user_friend_list"></section>
-            <!--아직 구현할필요 x-->
-            <section class="user_friend_store"></section>
-          </aside>
-          <div id="content" class="content">
-            <!-- 중앙 박스-->
-            <section class="chat_section">
-              <!-- 왼쪽 사이드 영역 : 채팅목록을 띄워줌-->
-              <h2 class="blind">대화목록 컨텐츠</h2>
-              <section class="chat_list_search">
-                <!--위쪽 메뉴영역-->
-                <h3 class="blind">대화목록 검색</h3>
-                <ul class="alarm_header">
-                  <li class="on">
-                    <button class="btn_alarm_menu" type="button">
-                      <span><i class="fas fa-comment-medical fa-2x"></i></span
-                      ><!--좌측 말풍선 아이콘-->
-                    </button>
-                  </li>
-                  <li>
-                    <button class="btn_alarm_menu" type="button">
-                        <span class="alarm_count">8
-                          <em class="blind">개의</em>
-                          </span>
-                          <strong class="text_alarm" aria-hidden="true">안읽음</strong>
-                          <span class="blind">안읽은 메시지 보기</span>
-                      </span>
-                    </button>
-                  </li>
-                </ul>
-                <div class="search_wrap">
-                  <h4 class="blind">대화방 이름 검색</h4>
-                  <input
-                    type="text"
-                    id="form_sch"
-                    title="대화내역 검색"
-                    autocomplete="off"
-                    value
-                  />
-                  <div class="btn_sch_wrap">
-                    <button class="btn_delete_text" type="button">
-                      <span>
-                        <i></i>
-                      </span>
-                    </button>
-                    <button class="btn_sch" type="button">
-                      <span>
-                        <i></i>
-                      </span>
-                    </button>
-                  </div>
-                  <label for="form_sch" class="text_sch">
-                    "대화방 이름 검색"<i class="fn fn-search"></i>
-                  </label>
-                  <label for="form_sch" class="text_word">검색어 입력</label>
-                </div>
-              </section>
-              <section id="main_area" class="chat_list_area">
-                <h3 class="blind">대화목록</h3>
-                <div class="chat_list_wrap">
-                  <ul class="chat_list">
-                    <!-- 데이터 받아와서 채팅리스트 처리-->
-                  
-                    
-                  </ul>
-                </div>
-              </section>
-              <section class="chat_list_footer">
-                <h3 class="blind">대화목록 하단 영역</h3>
-                <div class="checkwrap">
-                  <input type="checkbox" id="check_delete" class="blind" />
-                  <label for="check_delete">
-                    <span class="check_box">
-                      <span class="img_alarm_checkbox_on"></span>
-                    </span>
-                  </label>
-                </div>
-                <div class="btn_delete_wrap">
-                  <button class="btn_delete_icon" type="button">
-                    <span> </span>
-                  </button>
-                  <button class="btn_delete" type="button">
-                    <em class="blind">선택한 대화</em>
-                    <span>
-                      <strong class="chat_delete">
-                        <span>"0""개"</span>삭제하기
-                      </strong>
-                    </span>
-                  </button>
-                  <button
-                    class="btn_delete_cancel"
-                    type="button"
-                    aria-label="대화 삭제 취소"
-                  >
-                    <span class="delete_cancel">취소</span>
-                  </button>
-                </div>
-              </section>
-            </section>
-            <!-- 중앙 그리드 패널 -->
-            <div class="ly_box_wrap hide"></div>
-            <!-- 블라인드 영역-->
-          </div>
-        </main>
-      </div>
+<body>
+  <!-- 상단 영역 -->
+  <header class="header">
+    <div class="logo">
+      <span class=title>KY Emochat</span>
     </div>
-    <script>var iconSrc = "{% static 'Chatbot/chatlist/images/chatbot.ico' %}"</script>
-    <script src="{% static 'Chatbot/chatlist/js/chatlist.js' %}"></script>
-  </body>
+    <ul class="icon">
+      <li class="fab fa-weixin">
+        <div class="consult hint">상담하기</div>
+      </li>
+      <li class="fas fa-chart-bar">
+        <div class="analyze hint">분석하기</div>
+      </li>
+      <li class="fas fa-user-circle" id="info">
+        <div class="user_info hint">정보</div>
+        <!-- 유저프로필 창 -->
+        <div class="user_info_box">
+          <div class="username_area">
+            <p class="username"></p>
+          </div>
+          <a class="logout_area">
+            <div class="logout_icon">
+              <i class="fas fa-power-off"></i>
+            </div>
+            <div class="logout_text">
+              <span class="text">로그아웃</span>
+            </div>
+          </a>
+        </div>
+      </li>
+    </ul>
+
+  </header>
+
+  <!-- 채팅창 리스트 영역 -->
+  <section class="chatlist_area">
+    <ul class="chatlist">
+      <!-- 백엔드에서 받아오기 -->
+
+    </ul>
+  </section>
+
+  <!-- 하단 영역 -->
+  <section class="bottom"></section>
+  <script>var iconSrc = "{% static 'Chatbot/chatlist/images/chatbot.ico' %}"</script>
+  <script src="{% static 'Chatbot/chatlist/js/chatlist.js' %}"></script>
+</body>
+
 </html>
