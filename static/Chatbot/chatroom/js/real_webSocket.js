@@ -13,7 +13,7 @@ chatSocket.onmessage = function(e){
         appendMessage(PERSON_NAME, PERSON_IMG, "right",data.message, formatDate(new Date()));
         saveUserSentences(data.message,localStorage.getItem('login_token'))
     }else{
-        appendMessage(data.nickname, "../static/Chatbot/chatlist/images/consultation.svg", "left",data.message, formatDate(new Date()));
+        appendMessage(data.nickname, "/static/Chatbot/chatlist/images/consultation.svg", "left",data.message, formatDate(new Date()));
     }
 };
 

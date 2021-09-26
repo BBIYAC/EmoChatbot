@@ -64,7 +64,7 @@ function uploadImg(event) {
     console.log(imgURL);
     console.log(file)
 
-    fetch(`http://ec2-3-35-53-253.ap-northeast-2.compute.amazonaws.com:8000/chatting/analysis/`, { //배포시 배포 주소로 바꾸기
+    fetch(`http://127.0.0.1:2000/chatting/analysis/`, { //배포시 배포 주소로 바꾸기
       method: 'POST',
       headers: myHeader,
       body: imgURL,
