@@ -172,16 +172,28 @@ ul {
   color : red;
 }
 
-.chatlist {
-  margin : 0 auto;
-}
+/* section */
 .chatlist_area{
-  display :flex;
+  /* display :flex; */
+  /* margin : 0 auto; */
+  
 }
-
+/* ul */
+.chatlist {
+  /* display :flex;
+  flex-direction: column; */
+  /* margin : 0 auto; */
+  /* margin : 0 20%; */
+}
+/* li */
+.room{
+  
+}
+/* a */
 .chatlist_link{
   display:flex;
   border-bottom : var(--border-light);
+  /* margin : 0 auto; */
 }
 .chatlist_link:hover{
   background-color : var(--grey-light);
@@ -192,36 +204,44 @@ ul {
 }
 
 @media screen and (min-width : 768px){
-  .chatlist_link{
-    min-width : 768px;
+  .chatlist_area{
+    margin : 0 20%;
   }
 }
 
 .thumbnail_wrap {
   margin : var(--padding);
+  display : flex;
+  align-items : center;
 }
 
 .thumbnail_wrap img{
-  width : 36px;
-  height : 36px;
+  width : 40px;
+  height : 40px;
   border-radius : 50%;
 }
 
 .text_wrap{
   display:flex;
   flex-direction : column;
+  white-space: nowrap;
   width : 100%;
   margin : var(--padding);
 }
 
 .text_wrap .message {
-  font-size : var(--font-small);
+  font-size : var(--font-medium);
   color : var(--grey-dark);
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
 }
+
+.text_wrap .text_area {
+  padding : calc(var(--padding)/2) 0;
+}
+
 .nameAndDate {
   display : flex;
   justify-content: space-between;

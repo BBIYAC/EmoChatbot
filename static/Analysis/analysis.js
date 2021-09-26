@@ -160,7 +160,7 @@ function setting_prev() {
 function getAnalysisResult(login_token) {
     var header = new Headers();
     header.append('Content-Type', 'application/json');
-    fetch(`http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/analysis/`, { //임시사용 사용 후 다시 위에있는 주소로 교체
+    fetch(`http://ec2-54-180-100-94.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/analysis/`, { //임시사용 사용 후 다시 위에있는 주소로 교체
         method: 'GET',
         headers: header,
         credentials: 'include',

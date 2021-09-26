@@ -1,4 +1,4 @@
-let ListForm = (title, roomNumber, last_sentence, created_time) => {
+let ListForm = (iconSrc,title, roomNumber, last_sentence, created_time) => {
   return `<li class="room ${roomNumber}">
   <a class="chatlist_link ${roomNumber}">
   <div class="thumbnail_wrap">
@@ -51,7 +51,7 @@ function ifLogined() {
 function getChatRoomList(login_token) {
   var header = new Headers();
   header.append('Content-Type', 'application/json');
-  fetch(`http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/`, { //임시사용 사용 후 다시 위에있는 주소로 교체
+  fetch(`http://ec2-54-180-100-94.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/`, { //임시사용 사용 후 다시 위에있는 주소로 교체
     method: 'GET',
     headers: header,
     credentials: 'include',
@@ -66,7 +66,11 @@ function getChatRoomList(login_token) {
         if (data.created_time) {
           created_time = showRecordedTime(data.created_time);
         }
-        chatList.innerHTML += ListForm(data.chatting_room_name, data.id, data.last_sentence, created_time);
+        if(data.is_real_time === true){
+          chatList.innerHTML += ListForm("https://image.flaticon.com/icons/svg/145/145867.svg",data.chatting_room_name, data.id, data.last_sentence, created_time);
+        }else{
+          chatList.innerHTML += ListForm("https://image.flaticon.com/icons/svg/327/327779.svg",data.chatting_room_name, data.id, data.last_sentence, created_time);
+        }
         is_real_time_list.push(data.is_real_time)
       }
       const rooms = document.querySelectorAll('.room');
@@ -85,7 +89,7 @@ function getChatRoomList(login_token) {
 function createRealtimeRoom(login_token, chatting_room_name) {
   var header = new Headers();
   header.append('Content-Type', 'application/json');
-  fetch(`http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/`, { //임시사용 사용 후 다시 위에있는 주소로 교체
+  fetch(`http://ec2-54-180-100-94.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/`, { //임시사용 사용 후 다시 위에있는 주소로 교체
     method: 'POST',
     headers: header,
     credentials: 'include',

@@ -36,7 +36,7 @@ async function getConversationSentences(login_token) {
   var header = new Headers();
   header.append('Content-Type', 'application/json');
   // http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/f36192fbf818b87a77ccc64641dca8564db2c568/1/conversation-sentences
-  return await fetch(`http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/${window.location.href.split('/')[5]}/conversation-sentences/`, {
+  return await fetch(`http://ec2-54-180-100-94.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/${window.location.href.split('/')[5]}/conversation-sentences/`, {
     method: 'GET',
     headers: header,
     credentials: 'include',

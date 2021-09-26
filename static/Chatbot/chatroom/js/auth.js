@@ -34,7 +34,7 @@ login.addEventListener('click', () => {
     // }).catch(error => {
     //     console.log(error);
     // });
-    fetch('http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/login/', {
+    fetch('http://ec2-54-180-100-94.ap-northeast-2.compute.amazonaws.com:8000/login/', {
         method: 'POST',
         headers: header,
         credentials: 'include',

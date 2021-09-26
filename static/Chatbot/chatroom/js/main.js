@@ -315,7 +315,7 @@ async function saveNotUnderstandableSentences(text) {
   header.append('Authorization', token);
   // console.log( 'Token ' + localStorage.getItem('login_token'))
   header.append('X-CSRFToken', document.querySelector('input[name="csrftoken"]').value)
-  return await fetch(`http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/collect-not-understandable/`, {
+  return await fetch(`http://ec2-54-180-100-94.ap-northeast-2.compute.amazonaws.com:8000/collect-not-understandable/`, {
     method: 'POST',
     credentials: 'include',
     headers: {
@@ -342,7 +342,7 @@ async function saveUserImage(stcId, image) {
   console.log("stc : ", stcId);
   // http://127.0.0.1:2000/chatroominfo/${localStorage.getItem('login_token')}/${window.location.href.split('/')[4]}/conversation-sentences/image/
   // http://127.0.0.1:2000/chatroominfo/1589685ec15b73a08c17262a1fc43246727cfff0/1/conversation-sentences/image/
-  return await fetch(`http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${localStorage.getItem('login_token')}/${window.location.href.split('/')[4]}/conversation-sentences/image/`, {
+  return await fetch(`http://ec2-54-180-100-94.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${localStorage.getItem('login_token')}/${window.location.href.split('/')[4]}/conversation-sentences/image/`, {
     method: 'POST',
     credentials: 'include',
     body: formData
@@ -360,7 +360,7 @@ async function saveUserImage(stcId, image) {
 async function saveUserSentences(text, login_token, image = null) {
   var myHeader = new Headers();
   myHeader.append('Content-Type', 'application/json');
-  return await fetch(`http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/${window.location.href.split('/')[4]}/conversation-sentences/`, {
+  return await fetch(`http://ec2-54-180-100-94.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/${window.location.href.split('/')[4]}/conversation-sentences/`, {
     method: 'POST',
     headers: myHeader,
     credentials: 'include',
@@ -384,7 +384,7 @@ async function saveUserSentences(text, login_token, image = null) {
 async function saveAISentences(text, login_token) {
   var myHeader = new Headers();
   myHeader.append('Content-Type', 'application/json');
-  return await fetch(`http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/${window.location.href.split('/')[4]}/conversation-sentences/ai/`, {
+  return await fetch(`http://ec2-54-180-100-94.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/${window.location.href.split('/')[4]}/conversation-sentences/ai/`, {
     method: 'POST',
     headers: myHeader,
     credentials: 'include',
@@ -425,7 +425,7 @@ async function saveforAnalysis(text, login_token, emotion) {
   var currentTime = new Date();
   currentTime.getDate()
   myHeader.append('Content-Type', 'application/json');
-  return await fetch(`http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/analysis/`, {
+  return await fetch(`http://ec2-54-180-100-94.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/analysis/`, {
     method: 'POST',
     headers: myHeader,
     credentials: 'include',

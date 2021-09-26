@@ -35,8 +35,8 @@ function checkIfPassed2DaysORNot() {
 async function getConversationSentences(login_token) {
     var header = new Headers();
     header.append('Content-Type', 'application/json');
-    // http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/f36192fbf818b87a77ccc64641dca8564db2c568/1/conversation-sentences
-    return await fetch(`http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/${window.location.href.split('/')[4]}/conversation-sentences/`, {
+    // http://ec2-54-180-100-94.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/f36192fbf818b87a77ccc64641dca8564db2c568/1/conversation-sentences
+    return await fetch(`http://ec2-54-180-100-94.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/${window.location.href.split('/')[4]}/conversation-sentences/`, {
         method: 'GET',
         headers: header,
         credentials: 'include',
@@ -61,7 +61,7 @@ async function getConversationSentences(login_token) {
 
 function showPreviouschatRecords(chatData) {
     chatData.forEach((value, index, array) => {
-        if (value.UserInformation_id == 4) {
+        if (value.UserInformation_id == 12) {
             if (value.text.includes("http")) {
                 texts = value.text.split('<br>');
                 appendLinkButton(texts);
@@ -84,7 +84,7 @@ function showPreviouschatRecords(chatData) {
 
 
 async function getImage(value) {
-    return await fetch(`http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${localStorage.getItem('login_token')}/${window.location.href.split('/')[4]}/conversation-sentences/image/`, {
+    return await fetch(`http://ec2-54-180-100-94.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${localStorage.getItem('login_token')}/${window.location.href.split('/')[4]}/conversation-sentences/image/`, {
         method: 'GET',
         credentials: 'include',
 
@@ -92,7 +92,7 @@ async function getImage(value) {
         event.json().then((data) => {
             let obj =Object(data);
             var img = document.getElementById(`${value.id}`);
-            img.src = 'http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000'+obj[value.id][0].image;
+            img.src = 'http://ec2-54-180-100-94.ap-northeast-2.compute.amazonaws.com:8000'+obj[value.id][0].image;
         })
     }).catch((error) => {
         console.error(error)
@@ -113,7 +113,7 @@ function showRecordedTime(created_date) {
 async function getChatRoomList(login_token) {
     var header = new Headers();
     header.append('Content-Type', 'application/json');
-    return await fetch(`http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/`, {
+    return await fetch(`http://ec2-54-180-100-94.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/`, {
         method: 'GET',
         headers: header,
         credentials: 'include',

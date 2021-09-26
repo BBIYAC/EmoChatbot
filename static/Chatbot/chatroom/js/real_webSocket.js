@@ -1,6 +1,6 @@
 const chatSocket = new WebSocket(
     'ws://'
-    + "ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000" //"ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000"
+    + "ec2-54-180-100-94.ap-northeast-2.compute.amazonaws.com:8000" //"ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000"
     +'/ws/chat/'
     + localStorage.getItem('login_token') +"A"+window.location.href.split('/')[5] //test : 285bd93d27b4aa4f76495ded9f14e94fa4226f2d localStorage.getItem('login_token')
     +'/'
@@ -26,7 +26,7 @@ chatSocket.onclose = function(e){
 async function saveUserSentences(text,login_token,image=null){
     var myHeader = new Headers();
     myHeader.append('Content-Type', 'application/json');
-    return await fetch(`http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/${window.location.href.split('/')[5]}/conversation-sentences/`,{
+    return await fetch(`http://ec2-54-180-100-94.ap-northeast-2.compute.amazonaws.com:8000/chatroominfo/${login_token}/${window.location.href.split('/')[5]}/conversation-sentences/`,{
       method: 'POST',
       headers: myHeader,
       credentials: 'include',
