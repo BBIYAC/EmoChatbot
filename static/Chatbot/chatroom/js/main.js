@@ -40,9 +40,9 @@ window.onload = function () {
 }
 
 let saveCondition = {
-  "saveflag" : false,
-  "imageEmotion" : "",
-  "text" : ""
+  "saveflag": false,
+  "imageEmotion": "",
+  "text": ""
 }
 
 //  이미지 업로드 시 채팅에 이미지 출력
@@ -147,10 +147,10 @@ msgerForm.addEventListener("submit", event => {
 // Chat 추가 함수
 function appendMessage(name, img, side, text, time) {
   //   Simple solution for small apps
-  if (saveCondition.saveflag === true){
+  if (saveCondition.saveflag === true) {
     saveCondition.text = text;
     console.log(saveCondition);
-    saveforAnalysis(saveCondition.text,localStorage.getItem('login_token'),saveCondition.imageEmotion)
+    saveforAnalysis(saveCondition.text, localStorage.getItem('login_token'), saveCondition.imageEmotion)
     saveCondition.saveflag = false;
   }
   const msgHTML = `
@@ -269,8 +269,11 @@ function botResponse(rawText) {
           texts = msgText.split('<br>');
           appendLinkButton(texts);
           saveAISentences(msgText, localStorage.getItem('login_token'));
-        }
-        else {
+        } else if ((msgText.includes("마지막에 말씀을 잘 못 이해 한것 같아요") || msgText.includes("제가 제대로 이해하지 못한것 같아요. 죄송해요"))){
+          saveNotUnderstandableSentences(rawText);
+          appendMessage(BOT_NAME, BOT_IMG, "left", msgText, formatDate(new Date()));
+          saveAISentences(msgText, localStorage.getItem('login_token'));
+        } else {
           appendMessage(BOT_NAME, BOT_IMG, "left", msgText, formatDate(new Date()));
           saveAISentences(msgText, localStorage.getItem('login_token'));
         }
@@ -280,6 +283,56 @@ function botResponse(rawText) {
       console.log(error);
     })
 
+}
+// http://127.0.0.1:2000/chatroominfo/${localStorage.getItem('login_token')}/${window.location.href.split('/')[4]}/conversation-sentences/image/
+// http://127.0.0.1:2000/chatroominfo/1589685ec15b73a08c17262a1fc43246727cfff0/1/conversation-sentences/image/
+
+function parse_cookies() {
+  var cookies = {};
+  console.log(document.cookie)
+  if (document.cookie && document.cookie !== '') {
+      document.cookie.split(';').forEach(function (c) {
+          var m = c.trim().match(/(\w+)=(.*)/);
+          if(m !== undefined) {
+              cookies[m[1]] = decodeURIComponent(m[2]);
+          }
+      });
+  }
+  return cookies;
+}
+var cookies = parse_cookies();
+console.log(document.querySelector('input[name="csrftoken"]').value);
+
+//
+// SEND THE FORM!
+//
+
+async function saveNotUnderstandableSentences(text) {
+  var token = 'Token ' + localStorage.getItem('login_token')
+  var header = new Headers();
+  console.log("하이ㄴ")
+  header.append('Content-Type', 'application/json');
+  header.append('Authorization', token);
+  // console.log( 'Token ' + localStorage.getItem('login_token'))
+  header.append('X-CSRFToken', document.querySelector('input[name="csrftoken"]').value)
+  return await fetch(`http://ec2-3-35-207-163.ap-northeast-2.compute.amazonaws.com:8000/collect-not-understandable/`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': ' Token '+localStorage.getItem('login_token'),
+    },
+    body: JSON.stringify({
+      "text": text
+    })
+  })
+    .then((event) => {
+      event.json().then((data) => {
+        console.log(data);
+      })
+    }).catch((error) => {
+
+    });
 }
 
 async function saveUserImage(stcId, image) {
@@ -351,7 +404,7 @@ async function saveAISentences(text, login_token) {
 // var currentTime = new Date();
 // console.log(getFormatDate(currentTime));
 
-function getFormatDate(date){
+function getFormatDate(date) {
   var year = date.getFullYear();
   var month = (1 + date.getMonth());
   month = month >= 10 ? month : '0' + month;
@@ -385,7 +438,7 @@ async function saveforAnalysis(text, login_token, emotion) {
     .then((event) => {
       event.json().then((data) => {
         console.log(data);
-        
+
       })
     }).catch((error) => {
 
