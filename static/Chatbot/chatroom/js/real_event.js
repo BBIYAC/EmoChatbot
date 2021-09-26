@@ -63,7 +63,7 @@ function showPreviouschatRecords(chatData) {
       appendMessage(localStorage.getItem('nickname'), PERSON_IMG, "right", value.text, showRecordedTime(value.created_date));
 
     } else {
-      appendMessage("counselor", "/static/Chatbot/chatlist/images/consultation.svg/static/Chatbot/chatlist/images/consultation.svg", "left", value.text, showRecordedTime(value.created_date));
+      appendMessage("counselor", "/static/Chatbot/chatlist/images/consultation.svg/", "left", value.text, showRecordedTime(value.created_date));
     }
   })
 
