@@ -67,7 +67,7 @@ function getChatRoomList(login_token) {
           created_time = showRecordedTime(data.created_time);
         }
         if(data.is_real_time === true){
-          chatList.innerHTML += ListForm("https://image.flaticon.com/icons/svg/145/145867.svg",data.chatting_room_name, data.id, data.last_sentence, created_time);
+          chatList.innerHTML += ListForm("../static/Chatbot/chatlist/images/consultation.svg",data.chatting_room_name, data.id, data.last_sentence, created_time);
         }else{
           chatList.innerHTML += ListForm("https://image.flaticon.com/icons/svg/327/327779.svg",data.chatting_room_name, data.id, data.last_sentence, created_time);
         }
