@@ -1,93 +1,25 @@
-# EmoChatbot
-TEST_LINK : https://emochatbot.herokuapp.com/
+# 감정 분석을 위한 심리 상담 보조 챗봇
+<img src="https://img.shields.io/badge/Html-important?style=flat-square&logo=HTML5&logoColor=white"/> <img src="https://img.shields.io/badge/CSS-1572B6?style=flat-square&logo=CSS3&logoColor=white"/> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=white"/> <img src="https://img.shields.io/badge/Django-092E20?style=flat-square&logo=Django&logoColor=white"/> <img src="https://img.shields.io/badge/Dialogflow-FF9800?style=flat-square&logo=Dialogflow&logoColor=white"/> <img src="https://img.shields.io/badge/Amazon AWS-232F3E?style=flat-square&logo=Amazon AWS&logoColor=FF9900"/> <img src="https://img.shields.io/badge/Amazon S3-69A31?style=flat-square&logo=Amazon S3&logoColor=white"/>
 
 
-## Django 실행 방법
-**1. Repository 가져오기**
-  ```
-  git clone [REPO_URL]
-   ```
-
-**2. 가상환경 생성**
-  ```
-  python -m venv myvenv
-  ```
-
-**3. 가상환경 실행(window)** 
-  ```
-  source myvenv/Scripts/activate
-  ```
-
-**4. 패키지 설치**
-  ```
-  pip install -r requirements.txt
-  ```
-
-**5. makemigrations**
-  ```
-  python manage.py makemigrations
-  ```
-
-**6. migrate**
-  ```
-  python manage.py migrate
-  ```
-
-**7. 장고 서버 실행**
-  ```
-  python manage.py runserver
-  ```
+### * 주요 기능
+1. Dialogflow를 활용한 챗봇과의 심리 상담 대화
+2. Django Channels를 활용한 실제 상담사와 실시간 채팅 대화
+3. 상담 대화 후 텍스트와 이미지를 통한 감정 분석
+4. 주기적인 접속을 위한 이메일 알림 서비스
 
 
-## Heroku 배포
-### 1. settings.py
-- DEBUG 수정
-  ```
-  # DEBUG = True 
-  DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
-  ```
+### * 구현 화면
+<img width="90%" alt="image" src="https://user-images.githubusercontent.com/78192524/199170948-1fc18de0-96f7-4360-9888-6f42201d0764.png">
 
-- SECRET_KEY 수정
-  ```
-  import os 
-  # SECRET_KEY = '[YOUR_SECRET_KEY]'
-  SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '[YOUR_SECRET_KEY]')
-  ```
 
-- ALLOW_HOST 수정
+### * 로컬 실행 방법
 ```
-ALLOWED_HOSTS = [
-    '[배포한 앱 이름]].herokuapp.com',
-    '127.0.0.1'
-]
+1. git clone [REPO_URL]
+2. python -m venv myvenv
+3. source myvenv/Scripts/activate
+4. pip install -r requirements.txt
+5. python manage.py makemigrations
+6. python manage.py migrate
+7. python manage.py runserver
 ```
-
-
-### 2. Heroku 연결
-- 회원가입  
-  https://www.heroku.com
-
-- 로그인
-  ```
-  heroku login
-  ```  
-
-- 저장소 생성
-  ```
-  heroku create 저장소이름
-  ```
-
-- push
-  ```
-  git push heroku main
-  ```
-  
-- migrate
-  ```
-  heroku run python manage.py migrate
-  ```
-
-- 배포한 파일 실행
-  ```
-  heroku open
-  ```
