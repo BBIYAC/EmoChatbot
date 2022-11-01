@@ -15,9 +15,10 @@
 
 ### * 로컬 실행 방법
 ```
-1. git clone [REPO_URL]
+1. git clone https://github.com/BBIYAC/EmoChatbot.git
 2. python -m venv myvenv
-3. source myvenv/Scripts/activate
+3. source myvenv/Scripts/activate(windows)
+   source myvenv/bin/activate(macOS)
 4. pip install -r requirements.txt
 5. python manage.py makemigrations
 6. python manage.py migrate
